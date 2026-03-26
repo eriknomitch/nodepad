@@ -22,6 +22,20 @@ An alternative layout that groups notes into columns by content type. Column ord
 
 **When to use it**: reviewing thinking by category, managing tasks, or seeing the overall distribution of note types.
 
+### 3. Graph View
+
+A third view (⌘3) that renders all notes as an interactive force-directed graph using **D3.js**. The layout is driven by real AI-detected connections (`influencedBy`) — no artificial spoke lines or center anchors. A **centrality-radial force** (`d3.forceRadial`) positions highly-connected notes near the center and isolated notes at the periphery, so the layout itself encodes the importance of each note in the research network.
+
+The synthesis note (if present) has the highest connection degree and naturally settles near the center.
+
+**Simulation design**: two effects manage the lifecycle — an init-once effect creates the simulation and stops it; an update effect mutates nodes and links in-place and reheats with a controlled alpha (`0.4` for new nodes, `0.15` for enrichment completion). This prevents the violent restarts that would occur if the simulation were recreated on every render.
+
+**Enriching nodes** are fixed at their current position (`fx/fy`) during enrichment so they don't drift; the fix is released when enrichment completes and the simulation gently reheats.
+
+**Interaction**: click a node to open a full detail panel (30% of canvas width) showing the same fields as a tile card — editable text, editable annotation, editable category, confidence bar, sources, and a connected-nodes list. Hover a node to dim the unrelated graph. The canvas index (⌘I) also drives graph highlighting — hovering a title in the index highlights the corresponding node.
+
+**What this gives the user**: a spatial perspective focused entirely on relationships, making it easy to see which notes are hubs and which are isolated observations.
+
 ### 3. AI Enrichment — Automatic Classification
 
 Every note is automatically classified into one of **14 content types** the moment it is created or edited. Classification happens in two passes:
@@ -108,6 +122,25 @@ Arabic and Hebrew text is detected automatically and the `.rtl-text` CSS class i
 
 A `?` button in the top-right of the status bar opens a full-height sliding panel with a structured guide to the app: the idea, quick start steps, content types, views, AI features, export/data, keyboard shortcuts, and usage tips.
 
+### 16. Feature Parity Across Views
+
+All three views render the same `TileCard` component (tiling, kanban) or an equivalent `GraphDetailPanel` (graph). Features available in every view:
+
+- Edit note text (double-click)
+- Edit annotation (double-click)
+- Edit category (click the category badge — triggers re-enrichment with the new category as a hint)
+- Delete note
+- Re-enrich note
+- Confidence bar (claims)
+- Sources with clickable links (web grounding)
+- Connected nodes list
+
+**Tiling-only**: pinning (`isPinned`). The pin gradient and visual treatment are a spatial feature of the tiling layout and are not surfaced in kanban or graph views.
+
+### 17. Clickable Links in Annotations
+
+AI annotations are written in Markdown and can contain inline links (e.g. `[Source](https://...)`). All annotation rendering passes through `react-markdown` + `remark-gfm` so these links are rendered as proper `<a>` tags that open in a new tab. This applies to tile cards in tiling and kanban views, and to the graph detail panel.
+
 ### Keyboard Shortcuts
 
 | Shortcut | Action |
@@ -116,6 +149,7 @@ A `?` button in the top-right of the status bar opens a full-height sliding pane
 | `⌘Z` | Undo |
 | `⌘1` | Tiling view |
 | `⌘2` | Kanban view |
+| `⌘3` | Graph view |
 | `⌘P` | Toggle projects sidebar |
 | `⌘I` | Toggle canvas index |
 | `⌘G` | Toggle synthesis panel |
@@ -136,6 +170,7 @@ A `?` button in the top-right of the status bar opens a full-height sliding pane
 | Components | shadcn/ui (Radix UI primitives) |
 | Animations | Framer Motion 11 |
 | Icons | Lucide React |
+| Graph | D3.js (`d3-force`, `d3-zoom`) — Graph View simulation |
 | Command palette | `cmdk` 1.1 |
 | Markdown render | `react-markdown` + `remark-gfm` |
 | AI API | OpenRouter (user's own key, forwarded via `x-or-key` header) |
@@ -150,25 +185,26 @@ All state lives in `app/page.tsx`, which is the single root component. There is 
 app/page.tsx  ←  owns everything
   ├── StatusBar
   ├── ProjectSidebar
-  ├── TilingArea / KanbanArea       ← receives blocks + callbacks
-  │     └── TileCard (×N)           ← receives one block + callbacks
+  ├── TilingArea / KanbanArea / GraphArea   ← receives blocks + callbacks
+  │     └── TileCard (×N)                  ← receives one block + callbacks
+  │     └── GraphDetailPanel               ← graph-only side panel
   ├── TileIndex
   ├── GhostPanel
-  ├── VimInput                      ← addBlock() lives here
+  ├── VimInput                             ← addBlock() lives here
   └── AboutPanel
 ```
 
 Key state in `page.tsx`:
 
 ```typescript
-projects: Project[]           // persisted → localStorage: nodepad-projects
-activeProjectId: string       // persisted → localStorage: nodepad-active-project
-viewMode: "tiling"|"kanban"   // ephemeral
-highlightedBlockId: string    // ephemeral, cross-panel hover sync
-isSidebarOpen: boolean        // ephemeral
-isIndexOpen: boolean          // ephemeral
-isGhostPanelOpen: boolean     // ephemeral
-isCommandKOpen: boolean       // ephemeral
+projects: Project[]                    // persisted → localStorage: nodepad-projects
+activeProjectId: string                // persisted → localStorage: nodepad-active-project
+viewMode: "tiling"|"kanban"|"graph"    // ephemeral
+highlightedBlockId: string             // ephemeral, cross-panel hover sync (all views incl. graph)
+isSidebarOpen: boolean                 // ephemeral
+isIndexOpen: boolean                   // ephemeral
+isGhostPanelOpen: boolean              // ephemeral
+isCommandKOpen: boolean                // ephemeral
 ```
 
 ### Feature → Code Map
@@ -306,11 +342,13 @@ components/
   tiling-minimap.tsx        Spatial minimap (bottom-right, tiling view)
   kanban-area.tsx           Column layout + connection dimming
   kanban-minimap.tsx        Column jump minimap (kanban view)
+  graph-area.tsx            D3 force-directed graph view (SVG + React)
+  graph-detail-panel.tsx    Graph side panel: full block detail + editing
   project-sidebar.tsx       Left panel: projects list + AI settings
   ghost-panel.tsx           Right panel: synthesis notes
   tile-index.tsx            Right panel: canvas index by category/type
   status-bar.tsx            Top bar: all status indicators + panel toggles
-  vim-input.tsx             Bottom input + ⌘K command grid
+  vim-input.tsx             Bottom input + ⌘K command grid (Views/Nav/Actions)
   about-panel.tsx           Full-height right Sheet: app guide
   ui/                       shadcn/ui primitives (Radix-backed)
 

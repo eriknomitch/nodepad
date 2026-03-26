@@ -24,6 +24,7 @@ The OpenRouter API key is entered by the user in the app's Settings panel (insid
 - **UI primitives**: shadcn/ui (components in `components/ui/`) backed by Radix UI
 - **Animations**: Framer Motion 11
 - **Icons**: Lucide React
+- **Graph**: D3.js (`d3-force`, `d3-zoom`) — used in Graph View
 - **Markdown**: `react-markdown` + `remark-gfm`
 - **Command palette**: `cmdk` 1.1
 - **Analytics**: `@vercel/analytics` (injected in `app/layout.tsx`)
@@ -39,7 +40,7 @@ The root page owns all application state and passes it down. Key state:
 
 - `projects: Project[]` — persisted to `nodepad-projects` in localStorage
 - `activeProjectId` — persisted to `nodepad-active-project`
-- `viewMode: "tiling" | "kanban"` — not persisted, defaults to `"tiling"`
+- `viewMode: "tiling" | "kanban" | "graph"` — not persisted, defaults to `"tiling"`
 - `highlightedBlockId` — ephemeral, for cross-panel highlighting
 - Panel booleans: `isSidebarOpen`, `isIndexOpen`, `isCommandKOpen`, `isGhostPanelOpen`
 - AI settings via `useAISettings()` hook from `lib/ai-settings.ts`
@@ -173,21 +174,33 @@ A `<TilingMinimap>` sits at `absolute bottom-4 right-4` and is visible whenever 
 
 Groups all blocks by `contentType` into columns. Column priority: task → thesis → processing → rest. Uses `KanbanMinimap` for navigation. Same connection dimming logic as tiling.
 
+### Graph (`components/graph-area.tsx`)
+
+D3 force-directed graph. **Centrality-radial layout**: `d3.forceRadial` targets nodes toward a radius inversely proportional to their connection degree — high-degree nodes drift toward center, isolated ones settle at the periphery. Only real `influencedBy` connections are drawn (no spokes). Synthesis node connects to all blocks and therefore naturally centres itself.
+
+**Simulation lifecycle**: two effects — init-once (`[]` deps) creates and stops the simulation; update effect (`[blocks, ghostNote]` deps) mutates nodes/links in-place and calls `sim.alpha(n).restart()`. Enriching nodes are pinned (`fx/fy`) at their current position during enrichment and released on completion.
+
+**Feature parity**: the `GraphDetailPanel` side panel supports editing text, annotation, and category (click category badge → triggers re-enrichment). Connection dimming on hover. `highlightedBlockId` from `TileIndex` hover also highlights the matching graph node.
+
+**Pinning is tiling-only** — the pin visual treatment (`isPinned` gradient) is only surfaced in tile cards, not in kanban or graph.
+
 ## Key Components (`components/`)
 
 | File | Purpose |
 |---|---|
-| `tile-card.tsx` | Core block card. Exports `TextBlock` type. Edit (double-click), category/annotation edit, pin, delete, sub-tasks, confidence bar, sources, connection dot indicator, RTL detection. `React.memo`-ized. |
+| `tile-card.tsx` | Core block card. Exports `TextBlock` type. Edit (double-click), category/annotation edit, pin, delete, sub-tasks, confidence bar, sources with clickable links, connection dot indicator, RTL detection. `React.memo`-ized. |
 | `tiling-area.tsx` | BSP tiling view with horizontal page scroll and spatial minimap. |
-| `kanban-area.tsx` | Kanban view grouped by content type. |
+| `kanban-area.tsx` | Kanban view grouped by content type. Category editing supported. |
 | `tiling-minimap.tsx` | Bottom-right minimap for tiling — vertical stack of page thumbnails with tooltips. |
 | `kanban-minimap.tsx` | Floating minimap for kanban — icon buttons with hover count badges. |
+| `graph-area.tsx` | D3 force-directed graph view. Centrality-radial layout, connection dimming, zoom/pan, `highlightedBlockId` sync with TileIndex. |
+| `graph-detail-panel.tsx` | Graph side panel. Matches tile-card feature set: editable text/annotation/category, confidence bar, sources (ReactMarkdown for clickable links), connected nodes list. |
 | `project-sidebar.tsx` | Slide-in left panel. Lists projects with rename/delete. Embeds AI settings (API key, model selector, web grounding toggle) and .nodepad import button. |
 | `ghost-panel.tsx` | Right-side synthesis panel. Shows current ghost note (generating or complete), solidify/dismiss actions, and history of past synthesis notes. |
 | `status-bar.tsx` | Top header: menu button, wordmark, project name, node count, enriching/error indicators, type breakdown, model label (only when API key set), clock, synthesis toggle, index toggle, about button. |
-| `vim-input.tsx` | Bottom input bar. Uses `cmdk` for Cmd+K command grid (Navigate 3-col, Actions 5-col). Enter submits a new block. Shows `⌘Z Undo` hint. |
-| `tile-index.tsx` | Right panel (toggleable). Groups blocks by category (tiling) or type (kanban). Highlight-on-hover synced with `highlightedBlockId`. |
-| `about-panel.tsx` | Full-height right Sheet (max-w-2xl, z-200). App introduction, quick start guide, content types, views, AI features, export/data, keyboard shortcuts, tips, and author credit. |
+| `vim-input.tsx` | Bottom input bar. Uses `cmdk` for Cmd+K command grid (Views 3-col / Navigate 4-col / Actions section). Enter submits a new block. Shows `⌘Z Undo` hint. |
+| `tile-index.tsx` | Right panel (toggleable). Groups blocks by category (tiling/graph) or type (kanban). Highlight-on-hover synced with `highlightedBlockId` across all views. |
+| `about-panel.tsx` | Full-height right Sheet (max-w-2xl, z-200). App introduction, quick start guide, content types, all three views, AI features, export/data, keyboard shortcuts, tips, and author credit. |
 | `components/ui/` | shadcn/ui primitives. |
 
 ## UI Patterns

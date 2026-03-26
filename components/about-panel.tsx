@@ -3,8 +3,8 @@
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet"
 import { CONTENT_TYPE_CONFIG } from "@/lib/content-types"
 import {
-  Sparkles, Keyboard, Layers, Kanban, FolderDown,
-  FolderInput, Download, Undo2, Brain, Zap, Globe, Search
+  Sparkles, Keyboard, Layers, Kanban, GitFork, FolderDown,
+  FolderInput, Download, Undo2, Brain, Zap, Globe, Search, Link
 } from "lucide-react"
 
 interface AboutPanelProps {
@@ -160,15 +160,22 @@ export function AboutPanel({ open, onClose }: AboutPanelProps) {
               <div className="flex gap-3 p-3 rounded-sm bg-secondary/30 border border-border/50">
                 <Layers className="h-4 w-4 flex-shrink-0 text-primary mt-0.5" />
                 <div>
-                  <p className="text-sm font-semibold text-foreground mb-0.5">Tiling view</p>
+                  <p className="text-sm font-semibold text-foreground mb-0.5">Tiling <span className="font-mono text-[10px] text-muted-foreground/50 ml-1">⌘1</span></p>
                   <p className="text-sm text-muted-foreground">Default. Nodes are laid out in a Binary Space Partition grid — each new node splits the available space. Navigate pages horizontally. A minimap in the bottom-right shows your spatial position.</p>
                 </div>
               </div>
               <div className="flex gap-3 p-3 rounded-sm bg-secondary/30 border border-border/50">
                 <Kanban className="h-4 w-4 flex-shrink-0 text-primary mt-0.5" />
                 <div>
-                  <p className="text-sm font-semibold text-foreground mb-0.5">Kanban view</p>
+                  <p className="text-sm font-semibold text-foreground mb-0.5">Kanban <span className="font-mono text-[10px] text-muted-foreground/50 ml-1">⌘2</span></p>
                   <p className="text-sm text-muted-foreground">Nodes grouped into columns by content type. Good for reviewing your thinking by category. Tasks always appear first.</p>
+                </div>
+              </div>
+              <div className="flex gap-3 p-3 rounded-sm bg-secondary/30 border border-border/50">
+                <GitFork className="h-4 w-4 flex-shrink-0 text-primary mt-0.5" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground mb-0.5">Graph <span className="font-mono text-[10px] text-muted-foreground/50 ml-1">⌘3</span></p>
+                  <p className="text-sm text-muted-foreground">An interactive force-directed graph of all your nodes. Connections between them become the focus — highly-connected nodes drift toward the centre, isolated ones settle at the periphery. Click any node to open its full detail panel. Hover to dim unrelated nodes.</p>
                 </div>
               </div>
             </div>
@@ -180,7 +187,7 @@ export function AboutPanel({ open, onClose }: AboutPanelProps) {
               {[
                 { icon: Brain, title: "Auto-classification", desc: "Every node is classified into one of 14 content types based on its meaning, not just its keywords." },
                 { icon: Zap, title: "Contextual annotation", desc: "The AI reads your whole canvas and writes a 2–4 sentence annotation for each node that explains it in the context of everything else." },
-                { icon: Search, title: "Connection mapping", desc: "Hover the dot indicator on any tile header to dim unrelated nodes and reveal which nodes are semantically connected." },
+                { icon: Search, title: "Connection mapping", desc: "Hover the dot indicator on any tile header to dim unrelated nodes and reveal which nodes are semantically connected. In Graph view, the same connections drive the layout — connected nodes pull toward each other." },
                 { icon: Globe, title: "Web grounding", desc: "Enable web grounding in settings to have claims, questions, and references verified against live sources. Citations appear inline." },
                 { icon: Sparkles, title: "Synthesis", desc: "After ≥3 nodes, nodepad quietly generates an emergent thesis — a 15–25 word synthesis of what you're actually thinking about. Solidify it to keep it, or dismiss." },
               ].map(({ icon: Icon, title, desc }) => (
@@ -230,6 +237,7 @@ export function AboutPanel({ open, onClose }: AboutPanelProps) {
                 <Shortcut keys={["⌘", "Z"]} label="Undo last action" />
                 <Shortcut keys={["⌘", "1"]} label="Tiling view" />
                 <Shortcut keys={["⌘", "2"]} label="Kanban view" />
+                <Shortcut keys={["⌘", "3"]} label="Graph view" />
                 <Shortcut keys={["⌘", "P"]} label="Toggle projects sidebar" />
                 <Shortcut keys={["⌘", "I"]} label="Toggle canvas index" />
                 <Shortcut keys={["⌘", "G"]} label="Toggle synthesis panel" />
@@ -245,8 +253,9 @@ export function AboutPanel({ open, onClose }: AboutPanelProps) {
               {[
                 "Write in fragments — nodepad handles the structure. You don't need to write in full sentences.",
                 "Mix types freely. A canvas with claims, questions, and quotes is richer than one with only one type.",
-                "The canvas index (top-right list icon) groups nodes by category — great for spotting emerging themes.",
-                "Pin important nodes with the pin icon so they stand out visually.",
+                "Switch to Graph view (⌘3) to understand which nodes are central to your thinking and which are peripheral.",
+                "The canvas index (⌘I) groups nodes by category — hovering a title in the index highlights the matching node in any view.",
+                "Pin important nodes with the pin icon in Tiling view so they stand out visually.",
                 "Tasks added to the canvas become a sub-task list — add sub-tasks by nesting them in the tile.",
                 "Use multiple projects (sidebar) to keep separate research threads isolated.",
               ].map((tip, i) => (
