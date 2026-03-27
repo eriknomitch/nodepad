@@ -75,7 +75,9 @@ export function TilingArea({
 
   // 1. Chunking into elastic chunks — declared before effects that depend on them
   const chunkedPages = useMemo(() => {
-    const gridBlocks = blocks.filter((b: TextBlock) => b.contentType !== "task")
+    const gridBlocks = blocks
+      .filter((b: TextBlock) => b.contentType !== "task")
+      .sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0))
     if (gridBlocks.length === 0) return []
     const chunks: TextBlock[][] = []
     for (let i = 0; i < gridBlocks.length; i += PAGE_SIZE) {

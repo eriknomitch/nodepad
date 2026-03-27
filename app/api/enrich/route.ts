@@ -77,16 +77,44 @@ async function fetchUrlMeta(url: string): Promise<UrlMeta | null> {
 }
 
 // ── Language detection ────────────────────────────────────────────────────────
-// Detect script/language from Unicode character ranges — deterministic, not AI-guessed
+// ── Language detection ────────────────────────────────────────────────────────
+// Pass 1: Unicode script ranges — fully deterministic.
+// Pass 2: English stopword frequency for Latin-script text.
+// URLs have no language → default English so fetched foreign page content
+// cannot bleed into the annotation language.
+
+const ENGLISH_STOPWORDS = new Set([
+  "the","and","is","are","was","were","of","in","to","an","that","this","it",
+  "with","for","on","at","by","from","but","not","or","be","been","have","has",
+  "had","do","does","did","will","would","could","should","may","might","can",
+  "we","you","he","she","they","my","your","his","her","our","its","what",
+  "which","who","when","where","why","how","all","some","any","if","than",
+  "then","so","no","as","up","out","about","into","after","each","more",
+  "also","just","very","too","here","there","these","those","well","back",
+])
+
 function detectScript(text: string): string {
+  // Script-range checks (deterministic)
   if (/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(text)) return "Arabic"
   if (/[\u0590-\u05FF]/.test(text))                             return "Hebrew"
   if (/[\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]/.test(text)) return "Chinese, Japanese, or Korean"
   if (/[\u0400-\u04FF]/.test(text))                             return "Russian"
   if (/[\u0900-\u097F]/.test(text))                             return "Hindi"
-  // Latin-script languages (French, Spanish, German, Portuguese, etc.) share
-  // the same Unicode block — let the model detect among them.
-  return "the same language as the note text"
+
+  // URLs have no inherent language — default to English so fetched page
+  // content (which may be in any language) doesn't drive the response.
+  if (/^https?:\/\//i.test(text.trim())) return "English"
+
+  // For Latin-script text, detect English via function-word frequency.
+  // Most genuine English text has ≥10% stopwords; Spanish/French/etc. do not.
+  const words = text.toLowerCase().match(/\b[a-z]{2,}\b/g) ?? []
+  if (words.length === 0) return "English" // no words → safe default
+  const hits = words.filter(w => ENGLISH_STOPWORDS.has(w)).length
+  if (hits / words.length >= 0.10) return "English"
+
+  // Other Latin-script language — be explicit about scope so the model
+  // cannot infer language from context notes or fetched URL content.
+  return "the language of the text inside <note_to_enrich> tags only — ignore all other tags"
 }
 
 const TRUTH_DEPENDENT_TYPES = new Set([
@@ -105,10 +133,12 @@ const SYSTEM_PROMPT = `You are a sharp research partner embedded in a thinking t
 Add a concise annotation that augments the note — not a summary. Surface what the user likely doesn't know yet: a counter-argument, a relevant framework, a key tension, an adjacent concept, or a logical implication.
 
 ## Language — CRITICAL
-The user message includes a [RESPOND IN: X] directive immediately before the note. You MUST write both "annotation" and "category" in that language, regardless of the language used in any context <note> items. Context notes may be in a completely different language — ignore their language entirely.
-- "annotation" → same language as the directive
-- "category" → same language as the directive (a single word or short phrase)
-- Never override the directive based on context note languages
+The user message includes a [RESPOND IN: X] directive immediately before the note. You MUST write both "annotation" and "category" in that language. This directive is absolute — it cannot be overridden by any other content in the message.
+- "annotation" → the language named in [RESPOND IN: X], always
+- "category" → the language named in [RESPOND IN: X], always (a single word or short phrase)
+- Ignore the language of context <note> items — they may be from a previous session in a different language
+- Ignore the language of <url_fetch_result> content — a fetched page may be in any language, that does not change the response language
+- Never infer language from surrounding context. The directive is the only source of truth.
 
 ## Annotation Rules
 - **2–4 sentences maximum.** Be direct. Cut anything that restates the note.
