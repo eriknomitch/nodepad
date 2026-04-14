@@ -27,7 +27,7 @@ function CopyEmailButton() {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest border px-2 py-0.5 rounded-sm transition-all duration-300 cursor-pointer"
+      className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest border px-2 py-0.5 rounded-sm transition-colors duration-300 cursor-pointer"
       style={{
         color:       copied ? "var(--color-emerald-400, #34d399)" : "color-mix(in oklch, var(--primary) 60%, transparent)",
         borderColor: copied ? "color-mix(in oklch, var(--color-emerald-400, #34d399) 35%, transparent)" : "color-mix(in oklch, var(--primary) 25%, transparent)",
@@ -53,7 +53,7 @@ function CopyEmailButton() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-3">
-      <h2 className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground/50 border-b border-border pb-2">
+      <h2 className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground/50 border-b border-border pb-2">
         {title}
       </h2>
       {children}
@@ -64,7 +64,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <div className="flex gap-4">
-      <div className="flex-shrink-0 flex h-6 w-6 items-center justify-center rounded-sm bg-primary/10 border border-primary/20 font-mono text-[10px] font-black text-primary">
+      <div className="flex-shrink-0 flex h-6 w-6 items-center justify-center rounded-sm bg-primary/10 border border-primary/20 font-mono text-[10px] font-semibold text-primary">
         {n}
       </div>
       <div className="space-y-1 pt-0.5">
@@ -112,9 +112,9 @@ export function AboutPanel({ open, onClose }: AboutPanelProps) {
               <span className="inline-block h-3 w-3 rounded-sm bg-primary/60" />
               <span className="inline-block h-3 w-3 rounded-sm bg-primary/30" />
             </div>
-            <h1 className="font-mono text-xl font-black text-foreground tracking-tight">nodepad</h1>
+            <h1 className="font-mono text-xl font-semibold text-foreground tracking-tight">nodepad</h1>
           </div>
-          <p className="text-base text-muted-foreground leading-relaxed max-w-lg">
+          <p className="text-base text-muted-foreground leading-relaxed max-w-lg text-pretty">
             A spatial research tool that reads what you write and enriches it with AI — no prompting, no chat. Just capture your thinking and let the structure emerge.
           </p>
           <p className="mt-2 text-xs font-mono text-primary/60 uppercase tracking-widest">
@@ -207,7 +207,7 @@ export function AboutPanel({ open, onClose }: AboutPanelProps) {
                   <div key={type} className="flex items-center gap-2.5 px-3 py-2 rounded-sm bg-secondary/50 border border-border/50">
                     <Icon className="h-3.5 w-3.5 flex-shrink-0" style={{ color: config.accentVar }} />
                     <div>
-                      <p className="font-mono text-[10px] font-bold uppercase tracking-wider" style={{ color: config.accentVar }}>
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-wider" style={{ color: config.accentVar }}>
                         {config.label}
                       </p>
                     </div>
@@ -333,7 +333,7 @@ export function AboutPanel({ open, onClose }: AboutPanelProps) {
               <span className="inline-block h-1.5 w-1.5 rounded-sm bg-primary" />
               <span className="inline-block h-1.5 w-1.5 rounded-sm bg-primary/60" />
               <span className="inline-block h-1.5 w-1.5 rounded-sm bg-primary/30" />
-              <span className="font-mono text-[10px] font-bold text-muted-foreground/40 ml-1">nodepad</span>
+              <span className="font-mono text-[10px] font-semibold text-muted-foreground/40 ml-1">nodepad</span>
             </div>
           </div>
 

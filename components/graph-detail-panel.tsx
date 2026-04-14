@@ -188,11 +188,11 @@ export function GraphDetailPanel({
         <div className="flex items-center gap-2 overflow-hidden" style={{ color: "inherit" }}>
           {/* Type display — read-only label; shimmer while enriching */}
           <Icon className="h-3 w-3 flex-shrink-0" />
-          <span className={`font-mono text-[10px] font-bold uppercase tracking-wider ${block.isEnriching ? "shimmer-text" : ""}`}>
+          <span className={`font-mono text-[10px] font-semibold uppercase tracking-wider ${block.isEnriching ? "shimmer-text" : ""}`}>
             {config.label}
           </span>
           {/* Category tag — read-only, updated by AI on enrichment */}
-          <span className="rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[8px] font-black uppercase tracking-tighter opacity-60">
+          <span className="rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-tighter opacity-60">
             #{block.category || "no-topic"}
           </span>
         </div>
@@ -207,28 +207,28 @@ export function GraphDetailPanel({
               }
               setIsTypePickerOpen(v => !v)
             }}
-            className={`p-1 rounded-sm transition-opacity ${isTypePickerOpen ? "opacity-100 bg-black/20" : "opacity-40 hover:opacity-90"}`}
+            className={`p-1.5 rounded-sm transition-opacity active:scale-95 ${isTypePickerOpen ? "opacity-100 bg-black/20" : "opacity-40 hover:opacity-90"}`}
             title="Change type"
           >
             <Tag className="h-3 w-3" />
           </button>
           <button
             onClick={() => onTogglePin(block.id)}
-            className={`p-1 rounded-sm transition-opacity ${block.isPinned ? "opacity-100" : "opacity-40 hover:opacity-90"}`}
+            className={`p-1.5 rounded-sm transition-opacity active:scale-95 ${block.isPinned ? "opacity-100" : "opacity-40 hover:opacity-90"}`}
             title={block.isPinned ? "Unpin" : "Pin"}
           >
             <Pin className="h-3 w-3" />
           </button>
           <button
             onClick={() => onReEnrich(block.id)}
-            className="p-1 rounded-sm opacity-40 hover:opacity-90 transition-opacity"
+            className="p-1.5 rounded-sm opacity-40 hover:opacity-90 transition-opacity active:scale-95"
             title="Re-enrich"
           >
             <RefreshCw className="h-3 w-3" />
           </button>
           <button
             onClick={onClose}
-            className="p-1 rounded-sm opacity-40 hover:opacity-90 transition-opacity"
+            className="p-1.5 rounded-sm opacity-40 hover:opacity-90 transition-opacity active:scale-95"
             title="Close"
           >
             <X className="h-3.5 w-3.5" />
@@ -252,11 +252,11 @@ export function GraphDetailPanel({
                 if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) commitText()
               }}
               rows={4}
-              className={`w-full resize-none rounded-sm bg-secondary/30 px-2 py-1.5 text-base font-bold leading-relaxed text-foreground focus:outline-none focus:ring-1 focus:ring-primary/30 border border-primary/30`}
+              className={`w-full resize-none rounded-sm bg-secondary/30 px-2 py-1.5 text-base font-semibold leading-relaxed text-foreground focus:outline-none focus:ring-1 focus:ring-primary/30 border border-primary/30`}
             />
           ) : (
             <p
-              className={`text-base font-bold leading-relaxed text-foreground cursor-text hover:bg-secondary/20 rounded-sm px-2 py-1 -mx-2 transition-colors ${block.isEnriching ? "shimmer-text" : ""}`}
+              className={`text-base font-semibold leading-relaxed text-foreground cursor-text hover:bg-secondary/20 rounded-sm px-2 py-1 -mx-2 transition-colors ${block.isEnriching ? "shimmer-text" : ""}`}
               onDoubleClick={() => { setDraftText(block.text); setEditingText(true) }}
               title="Double-click to edit"
             >
@@ -270,10 +270,10 @@ export function GraphDetailPanel({
           <div className="px-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[8px] uppercase tracking-widest text-muted-foreground/50">Confidence</span>
-              <span className="font-mono text-[10px] font-bold" style={{ color: accent }}>{block.confidence}%</span>
+              <span className="font-mono text-[10px] font-semibold tabular-nums" style={{ color: accent }}>{block.confidence}%</span>
             </div>
             <div className="h-1 w-full rounded-full bg-secondary overflow-hidden">
-              <div className="h-full rounded-full transition-all duration-500" style={{ width: `${block.confidence}%`, background: accent }} />
+              <div className="h-full rounded-full transition-[width] duration-500" style={{ width: `${block.confidence}%`, background: accent }} />
             </div>
           </div>
         )}
@@ -345,7 +345,7 @@ export function GraphDetailPanel({
       {isTypePickerOpen && pickerRect && createPortal(
         <div
           ref={typePickerDropdownRef}
-          className="rounded-md border border-border bg-card shadow-xl"
+          className="rounded-md border border-border bg-card shadow-elevated"
           style={{
             position: "fixed",
             top: pickerRect.bottom + 4,
@@ -368,7 +368,7 @@ export function GraphDetailPanel({
                   <button
                     key={type}
                     onClick={() => { onChangeType(block.id, type); setIsTypePickerOpen(false) }}
-                    className={`flex items-center gap-2 rounded-sm px-2 py-1.5 text-left transition-all hover:bg-secondary/60 ${isActive ? "bg-secondary/80" : ""}`}
+                    className={`flex items-center gap-2 rounded-sm px-2 py-1.5 text-left transition-colors hover:bg-secondary/60 ${isActive ? "bg-secondary/80" : ""}`}
                   >
                     <TypeIcon className="h-3 w-3 flex-shrink-0" style={{ color: cfg.accentVar }} />
                     <span className="font-mono text-[10px] uppercase tracking-wide" style={{ color: isActive ? cfg.accentVar : undefined }}>

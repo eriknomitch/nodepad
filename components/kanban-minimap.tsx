@@ -19,18 +19,18 @@ export function KanbanMinimap({ columns, onColumnClick }: KanbanMinimapProps) {
   if (columns.length === 0) return null
 
   return (
-    <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/10 backdrop-blur-md border border-white/5 shadow-xl transition-all hover:bg-black/20">
+    <div className="flex items-center gap-1.5 p-1 rounded-lg bg-black/40 backdrop-blur-md border border-white/10 shadow-elevated transition-colors hover:bg-black/50">
       {columns.map((col) => (
         <button
           key={col.id}
           onClick={() => onColumnClick(col.id)}
-          className="group relative flex items-center justify-center h-8 w-8 rounded-md hover:bg-white/10 transition-all active:scale-95"
+          className="group relative flex items-center justify-center h-8 w-8 rounded transition-colors hover:bg-white/10 active:scale-95"
           title={col.title}
         >
           <col.icon className="h-4 w-4 text-foreground/60 group-hover:text-foreground transition-colors" />
           
           {/* Indicator dot */}
-          <div className="absolute -top-0.5 -right-0.5 h-3 w-3 flex items-center justify-center rounded-full bg-primary text-[7px] font-bold text-primary-foreground border-2 border-background scale-0 group-hover:scale-100 transition-transform">
+          <div className="absolute -top-0.5 -right-0.5 h-3 w-3 flex items-center justify-center rounded-full bg-primary text-[7px] font-semibold text-primary-foreground border-2 border-background scale-0 group-hover:scale-100 transition-transform tabular-nums">
             {col.count}
           </div>
 

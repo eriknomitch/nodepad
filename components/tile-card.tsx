@@ -53,9 +53,9 @@ const MarkdownComponents = {
   ul: ({ children }: any) => <ul className="mb-3 list-disc pl-4 last:mb-0">{children}</ul>,
   ol: ({ children }: any) => <ol className="mb-3 list-decimal pl-4 last:mb-0">{children}</ol>,
   li: ({ children }: any) => <li className="mb-1">{children}</li>,
-  h1: ({ children }: any) => <h1 className="mb-2 text-base font-bold">{children}</h1>,
-  h2: ({ children }: any) => <h2 className="mb-2 text-base font-bold">{children}</h2>,
-  h3: ({ children }: any) => <h3 className="mb-1 text-sm font-bold">{children}</h3>,
+  h1: ({ children }: any) => <h1 className="mb-2 text-base font-semibold text-balance">{children}</h1>,
+  h2: ({ children }: any) => <h2 className="mb-2 text-base font-semibold text-balance">{children}</h2>,
+  h3: ({ children }: any) => <h3 className="mb-1 text-sm font-semibold text-balance">{children}</h3>,
   a: ({ href, children }: any) => {
     let displayDomain = href
     try {
@@ -73,7 +73,7 @@ const MarkdownComponents = {
       </a>
     )
   },
-  strong: ({ children }: any) => <strong className="font-bold text-foreground">{children}</strong>,
+  strong: ({ children }: any) => <strong className="font-semibold text-foreground">{children}</strong>,
 }
 
 // Simple heuristic to detect RTL text (Arabic/Hebrew)
@@ -256,7 +256,7 @@ export const TileCard = memo(function TileCard({
   return (
     <div
       ref={cardRef}
-      className={`group relative flex h-full w-full flex-col overflow-hidden border transition-all duration-200 ${
+      className={`group relative flex h-full w-full flex-col overflow-hidden border transition-[border-color,box-shadow,transform,opacity] duration-200 ${
         isHighlighted ? "z-10 scale-[1.002] border-primary/50 ring-2 ring-primary/20" : "border-border/50"
       } ${
         isTask ? "bg-[color-mix(in_oklch,var(--type-task)_8%,transparent)] border-[color-mix(in_oklch,var(--type-task)_25%,transparent)] shadow-[color-mix(in_oklch,var(--type-task)_8%,transparent)]" : "bg-card/30"
@@ -339,12 +339,12 @@ export const TileCard = memo(function TileCard({
 
           {/* Type display — read-only label */}
           <Icon className="h-3 w-3 flex-shrink-0" />
-          <span className="font-mono text-[10px] font-bold uppercase tracking-wider truncate max-w-[200px]">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-wider truncate max-w-[200px]">
             {config.label}
           </span>
 
           {block.isUnrelated && !effectiveCollapsed && (
-            <span className="ml-1 rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[8px] font-black uppercase tracking-tighter text-black/60">
+            <span className="ml-1 rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-tighter text-black/60">
               Not related to topic
             </span>
           )}
@@ -361,7 +361,7 @@ export const TileCard = memo(function TileCard({
                 }
                 onConnectionLock?.(block.id)
               }}
-              className={`flex items-center gap-[2.5px] transition-all duration-150 rounded-sm px-0.5 ${
+              className={`flex items-center gap-[2.5px] transition-opacity duration-150 rounded-sm px-0.5 ${
                 isConnectionLocked
                   ? "opacity-100 bg-black/20"
                   : "opacity-35 hover:opacity-90"
@@ -382,7 +382,7 @@ export const TileCard = memo(function TileCard({
                 e.stopPropagation()
                 onReEnrich(block.id, "thesis")
               }}
-              className="flex h-4 w-4 items-center justify-center rounded-sm transition-all hover:bg-black/20"
+              className="flex h-5 w-5 items-center justify-center rounded-sm transition-opacity hover:bg-black/20 active:scale-95"
               title="Refresh thesis synthesis"
               disabled={block.isEnriching}
             >
@@ -395,7 +395,7 @@ export const TileCard = memo(function TileCard({
                 e.stopPropagation()
                 onTogglePin(block.id)
               }}
-              className={`flex h-4 w-4 items-center justify-center rounded-sm transition-all shadow-sm ${block.isPinned ? "bg-black/20 opacity-100 scale-110 !opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
+              className={`flex h-5 w-5 items-center justify-center rounded-sm transition-opacity shadow-subtle active:scale-95 ${block.isPinned ? "bg-black/20 opacity-100 scale-110 !opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
               aria-label={block.isPinned ? "Unpin note" : "Pin note"}
               title={block.isPinned ? "Unpin note" : "Pin note"}
             >
@@ -413,7 +413,7 @@ export const TileCard = memo(function TileCard({
                 }
                 setIsTypePickerOpen(v => !v)
               }}
-              className={`flex h-4 w-4 items-center justify-center rounded-sm transition-all ${isTypePickerOpen ? "bg-black/20 opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
+              className={`flex h-5 w-5 items-center justify-center rounded-sm transition-opacity active:scale-95 ${isTypePickerOpen ? "bg-black/20 opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
               title="Change type"
             >
               <Tag className="h-2.5 w-2.5" />
@@ -424,7 +424,7 @@ export const TileCard = memo(function TileCard({
               e.stopPropagation()
               onDelete(block.id)
             }}
-            className="flex h-4 w-4 items-center justify-center rounded-sm transition-all hover:bg-black/10"
+            className="flex h-5 w-5 items-center justify-center rounded-sm transition-opacity hover:bg-black/10 active:scale-95"
             aria-label="Delete note"
           >
             <X className="h-2.5 w-2.5" />
@@ -436,7 +436,7 @@ export const TileCard = memo(function TileCard({
       {isTypePickerOpen && pickerRect && onChangeType && isMounted && createPortal(
         <div
           ref={typePickerDropdownRef}
-          className="rounded-md border border-border bg-card shadow-xl"
+          className="rounded-md border border-border bg-card shadow-elevated"
           style={{
             position: "fixed",
             top: pickerRect.bottom + 4,
@@ -462,7 +462,7 @@ export const TileCard = memo(function TileCard({
                       onChangeType(block.id, type)
                       setIsTypePickerOpen(false)
                     }}
-                    className={`flex items-center gap-2 rounded-sm px-2 py-1.5 text-left transition-all hover:bg-secondary/60 ${isActive ? "bg-secondary/80" : ""}`}
+                    className={`flex items-center gap-2 rounded-sm px-2 py-1.5 text-left transition-colors hover:bg-secondary/60 ${isActive ? "bg-secondary/80" : ""}`}
                   >
                     <TypeIcon className="h-3 w-3 flex-shrink-0" style={{ color: cfg.accentVar }} />
                     <span
@@ -506,7 +506,7 @@ export const TileCard = memo(function TileCard({
                       }}
                       onKeyDown={handleKeyDown}
                       onBlur={handleSave}
-                      className={`w-full resize-none rounded-sm bg-secondary/30 px-2 py-1.5 text-base font-bold leading-relaxed text-foreground focus:outline-none focus:ring-1 focus:ring-primary/30 ${isTextRTL ? 'rtl-text' : ''}`}
+                      className={`w-full resize-none rounded-sm bg-secondary/30 px-2 py-1.5 text-base font-semibold leading-relaxed text-foreground focus:outline-none focus:ring-1 focus:ring-primary/30 ${isTextRTL ? 'rtl-text' : ''}`}
                       style={{ minHeight: "3rem" }}
                     />
                     <div className="flex items-center gap-1">
@@ -529,10 +529,10 @@ export const TileCard = memo(function TileCard({
                 ) : (
                   <div className="w-full">
                     {block.isError && (
-                      <div className="mb-3 flex items-start gap-2 rounded-sm border border-red-500/20 bg-red-500/10 px-2.5 py-2">
-                        <span className="mt-px font-mono text-[9px] text-red-400/80 uppercase tracking-wider leading-relaxed">
+                      <div className="mb-3 flex items-start gap-2 rounded-sm border border-destructive/20 bg-destructive/10 px-2.5 py-2">
+                        <span className="mt-px font-mono text-[9px] text-destructive/80 uppercase tracking-wider leading-relaxed">
                           {block.statusText === "no-api-key"
-                            ? <>AI enrichment failed — no API key. Open the <strong className="text-red-300">☰ sidebar → Settings</strong> to add your API key.</>
+                            ? <>AI enrichment failed — no API key. Open the <strong className="text-destructive-foreground">☰ sidebar → Settings</strong> to add your API key.</>
                             : block.statusText
                               ? <>{block.statusText}{" "}<span className="opacity-60">Double-click to retry.</span></>
                               : "Enrichment failed. Double-click to retry."}
@@ -546,22 +546,18 @@ export const TileCard = memo(function TileCard({
                             <div key={st.id} className="group/task flex items-start gap-3 rounded-md bg-white/5 p-2 transition-colors hover:bg-white/10">
                               <button
                                 onClick={() => onToggleSubTask?.(block.id, st.id)}
-                                className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-all`} style={{ backgroundColor: st.isDone ? 'var(--type-task)' : 'transparent', borderColor: st.isDone ? 'var(--type-task)' : 'color-mix(in oklch, var(--type-task) 50%, transparent)' }}
+                                className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors`} style={{ backgroundColor: st.isDone ? 'var(--type-task)' : 'transparent', borderColor: st.isDone ? 'var(--type-task)' : 'color-mix(in oklch, var(--type-task) 50%, transparent)' }}
                               >
                                 {st.isDone && <Check className="h-3 w-3 text-white" />}
                               </button>
-                              <span className={`flex-1 text-sm leading-relaxed transition-all ${st.isDone ? 'text-foreground/40 line-through' : 'text-foreground'}`}>
+                              <span className={`flex-1 text-sm leading-relaxed transition-colors ${st.isDone ? 'text-foreground/40 line-through' : 'text-foreground'}`}>
                                 {st.text}
                               </span>
                               <button
-                                onClick={() => {
-                                  if (confirm("Delete this task?")) {
-                                    onDeleteSubTask?.(block.id, st.id)
-                                  }
-                                }}
-                                className="opacity-0 group-hover/task:opacity-100 p-1 hover:bg-red-500/20 rounded transition-all"
+                                onClick={() => onDeleteSubTask?.(block.id, st.id)}
+                                className="opacity-0 group-hover/task:opacity-100 p-1 hover:bg-destructive/20 rounded transition-opacity"
                               >
-                                <X className="h-3 w-3 text-red-400" />
+                                <X className="h-3 w-3 text-destructive" />
                               </button>
                             </div>
                           ))}
@@ -591,7 +587,7 @@ export const TileCard = memo(function TileCard({
                             <span className="font-mono text-[10px] text-muted-foreground/60">
                               Enter ↵ save · Shift+Enter newline · Esc cancel
                             </span>
-                            <span className="font-mono text-[9px] text-primary font-bold uppercase tracking-widest opacity-80">Markdown Editor</span>
+                            <span className="font-mono text-[9px] text-primary font-semibold uppercase tracking-widest opacity-80">Markdown Editor</span>
                           </div>
                         </div>
                     ) : (
@@ -616,11 +612,11 @@ export const TileCard = memo(function TileCard({
               <div className={`px-3 pb-2 flex-shrink-0 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="font-mono text-[9px] text-muted-foreground">Confidence</span>
-                  <span className="font-mono text-[9px] text-muted-foreground">{Math.round(block.confidence)}%</span>
+                  <span className="font-mono text-[9px] text-muted-foreground tabular-nums">{Math.round(block.confidence)}%</span>
                 </div>
                 <div className="h-0.5 w-full overflow-hidden rounded-full bg-secondary">
                   <div
-                    className="h-full rounded-full transition-all"
+                    className="h-full rounded-full transition-[width] duration-500"
                     style={{
                       width: `${Math.max(5, block.confidence)}%`,
                       background: accent,
@@ -635,7 +631,7 @@ export const TileCard = memo(function TileCard({
             {/* Footer */}
             <div
               ref={footerRef}
-              className={`relative flex flex-shrink-0 flex-col transition-all duration-300 ease-in-out ${
+              className={`relative flex flex-shrink-0 flex-col transition-colors duration-300 ease-in-out ${
                 isFooterExpanded ? "bg-secondary/40" : "bg-black/25"
               }`}
               style={{
@@ -647,7 +643,7 @@ export const TileCard = memo(function TileCard({
                   <div className={`flex items-start gap-2 overflow-hidden ${isFooterExpanded ? 'flex-wrap mb-1' : ''}`}>
                     {/* Category tag — read-only, updated by AI on enrichment */}
                     <span
-                      className="rounded-sm px-2 py-0.5 font-mono text-[10px] font-bold flex items-center gap-1.5 shadow-sm shrink-0"
+                      className="rounded-sm px-2 py-0.5 font-mono text-[10px] font-semibold flex items-center gap-1.5 shadow-subtle shrink-0"
                       style={{
                         background: `color-mix(in oklch, ${accent} 35%, transparent)`,
                         color: "white",
@@ -661,19 +657,19 @@ export const TileCard = memo(function TileCard({
                     {block.influencedBy && block.influencedBy.length > 0 && (
                       <div className="group/influences relative">
                         <div
-                          className="flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-primary/10 border border-primary/20 cursor-help transition-all hover:bg-primary/20"
+                          className="flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-primary/10 border border-primary/20 cursor-help transition-colors hover:bg-primary/20"
                           onMouseEnter={() => block.influencedBy?.forEach(id => onHighlight?.(id))}
                           onMouseLeave={() => block.influencedBy?.forEach(() => onHighlight?.(null))}
                         >
                           <Sparkles className="h-2.5 w-2.5 text-primary" />
-                          <span className="font-mono text-[9px] font-bold text-primary uppercase tracking-tighter">
+                          <span className="font-mono text-[9px] font-semibold text-primary uppercase tracking-tighter tabular-nums">
                             {block.influencedBy.length} {block.influencedBy.length === 1 ? 'Link' : 'Links'}
                           </span>
                         </div>
 
                         {/* Hover Tooltip */}
-                        <div className="absolute bottom-full left-0 mb-2 w-56 p-2 rounded-sm bg-black/90 backdrop-blur-md border border-white/10 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover/influences:opacity-100 group-hover/influences:translate-y-0 transition-all z-[100]">
-                          <h5 className="font-mono text-[8px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5 border-b border-white/5 pb-1">Connected nodes</h5>
+                        <div className="absolute bottom-full left-0 mb-2 w-56 p-2 rounded-sm bg-black/90 backdrop-blur-md border border-white/10 shadow-elevated opacity-0 translate-y-2 pointer-events-none group-hover/influences:opacity-100 group-hover/influences:translate-y-0 transition-[opacity,translate] z-[100]">
+                          <h5 className="font-mono text-[8px] font-semibold text-muted-foreground uppercase tracking-widest mb-1.5 border-b border-white/5 pb-1">Connected nodes</h5>
                           <div className="flex flex-col gap-1">
                             {block.influencedBy.slice(0, 5).map((id, i) => {
                               const linked = allBlocks?.find(b => b.id === id)
@@ -700,7 +696,7 @@ export const TileCard = memo(function TileCard({
                   {block.influencedBy && block.influencedBy.length > 1 && (
                     <button
                       onClick={() => setIsFooterExpanded(!isFooterExpanded)}
-                      className={`rounded-sm p-1 transition-all ${isFooterExpanded ? 'bg-primary/20 text-primary' : 'text-muted-foreground/40 hover:text-muted-foreground/60'}`}
+                      className={`rounded-sm p-1 transition-colors active:scale-95 ${isFooterExpanded ? 'bg-primary/20 text-primary' : 'text-muted-foreground/40 hover:text-muted-foreground/60'}`}
                     >
                       {isFooterExpanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3 rotate-[-90deg]" />}
                     </button>
@@ -708,7 +704,7 @@ export const TileCard = memo(function TileCard({
                   
                   <div className={`flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-secondary/30 border border-border/20 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-20"}`}>
                     <span className="font-mono text-[8px] text-muted-foreground/50 uppercase tracking-[0.1em]">Node ID:</span>
-                    <span className="font-mono text-[10px] text-muted-foreground/80 font-bold">#{block.id.slice(0, 6)}</span>
+                    <span className="font-mono text-[10px] text-muted-foreground/80 font-semibold">#{block.id.slice(0, 6)}</span>
                   </div>
                 </div>
               </div>
@@ -771,13 +767,13 @@ function renderBody(
       )
     case "italic":
       return (
-        <p className="text-base italic font-bold leading-relaxed text-foreground">
+        <p className="text-base italic font-semibold leading-relaxed text-foreground">
           {linkifyText(text)}
         </p>
       )
     case "muted-italic":
       return (
-        <p className="text-base italic font-bold leading-relaxed text-muted-foreground">
+        <p className="text-base italic font-semibold leading-relaxed text-muted-foreground">
           {linkifyText(text)}
         </p>
       )
@@ -796,7 +792,7 @@ function renderBody(
             {isDone && <Check className="h-2.5 w-2.5" style={{ color: "var(--background)" }} />}
           </div>
           <p
-            className="text-sm font-bold leading-relaxed text-foreground"
+            className="text-sm font-semibold leading-relaxed text-foreground"
             style={{
               textDecoration: isDone ? "line-through" : "none",
               opacity: isDone ? 0.6 : 1,
@@ -818,7 +814,7 @@ function renderBody(
       )
     default:
       return (
-        <p className="text-base font-bold leading-relaxed text-foreground">
+        <p className="text-base font-semibold leading-relaxed text-foreground">
           {linkifyText(text)}
         </p>
       )

@@ -108,13 +108,13 @@ export function KanbanArea({
   }, [columns])
 
   return (
-    <div className="relative h-full w-full bg-[#050505] overflow-hidden">
+    <div className="relative h-full w-full bg-[#08090a] overflow-hidden">
       {/* Scrollable Container */}
       <div 
         ref={containerRef}
         className="flex h-full w-full overflow-x-auto custom-scrollbar p-6 pb-6 gap-8"
       >
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="popLayout" initial={false}>
           {columns.map(([key, col]) => (
             <motion.div
               key={key}
@@ -126,20 +126,20 @@ export function KanbanArea({
               className="flex flex-col w-96 shrink-0 h-full max-h-full pb-2"
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between px-2 py-1 border-b border-border/40">
+              <div className="flex items-center justify-between px-3 py-2.5 border-b border-border/40">
                 <div className="flex items-center gap-2">
                   <col.icon className="h-4 w-4 text-muted-foreground" />
-                  <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/70">
+                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground/70">
                     {col.title}
                   </h3>
                 </div>
-                <span className="font-mono text-[9px] text-muted-foreground/40 font-bold">
+                <span className="font-mono text-[9px] text-muted-foreground/40 font-semibold tabular-nums">
                   {col.blocks.length}
                 </span>
               </div>
 
               {/* Column Content */}
-              <div className="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1 pb-4">
+              <div className="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1 pt-3 pb-4">
                 {col.blocks.map(block => {
                   const collapsed = collapsedIds.has(block.id)
                   return (
@@ -197,7 +197,7 @@ export function KanbanArea({
             </div>
 
 
-            <p className="text-[13px] text-white uppercase tracking-[0.15em] whitespace-nowrap">
+            <p className="text-[13px] text-foreground/35 uppercase tracking-[0.15em] whitespace-nowrap">
               {`type anything · #type to classify · ${mod}K for commands`}
             </p>
           </div>

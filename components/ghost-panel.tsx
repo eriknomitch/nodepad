@@ -26,7 +26,7 @@ export function GhostPanel({ ghostNotes, isOpen, onClose, onClaim, onDismiss }: 
         opacity: isOpen ? 1 : 0,
         visibility: isOpen ? "visible" : "hidden",
       }}
-      className="flex flex-col h-full bg-black/20 backdrop-blur-3xl border-l border-border shrink-0 overflow-hidden relative z-50 transition-all duration-200 ease-in-out"
+      className="flex flex-col h-full bg-black/20 backdrop-blur-3xl border-l border-border shrink-0 overflow-hidden relative z-50 transition-[width,opacity,visibility] duration-200 ease-in-out"
     >
       <div className="w-[272px] flex flex-col h-full">
         {/* Header */}
@@ -35,29 +35,30 @@ export function GhostPanel({ ghostNotes, isOpen, onClose, onClaim, onDismiss }: 
             <div className="flex items-center justify-center h-5 w-5 bg-primary/10 rounded-sm">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
             </div>
-            <h3 className="font-mono text-xs font-bold uppercase tracking-tight text-foreground/80 select-none">
+            <h3 className="font-mono text-xs font-semibold uppercase tracking-tight text-foreground/80 select-none">
               Synthesis
             </h3>
             {ghostNotes.length > 0 && (
-              <span className="font-mono text-[9px] bg-primary/20 text-primary px-1.5 py-0.5 rounded-sm font-bold tabular-nums">
+              <span className="font-mono text-[9px] bg-primary/20 text-primary px-1.5 py-0.5 rounded-sm font-semibold tabular-nums">
                 {ghostNotes.length}
               </span>
             )}
           </div>
           <button
             onClick={onClose}
-            className="p-1 px-1.5 hover:bg-white/5 rounded-sm transition-colors text-muted-foreground/30 hover:text-white"
+            className="relative p-1 px-1.5 hover:bg-white/5 rounded-sm transition-colors text-muted-foreground hover:text-foreground active:scale-95"
           >
             <X className="h-3.5 w-3.5" />
+            <span className="absolute inset-0 -m-1" aria-hidden="true" />
           </button>
         </div>
 
         {/* Note list */}
         <div className="flex-1 overflow-y-auto custom-scrollbar py-3 px-3 space-y-3">
           {ghostNotes.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-32 gap-3 opacity-25">
+            <div className="flex flex-col items-center justify-center h-32 gap-3 opacity-40">
               <Sparkles className="h-5 w-5" />
-              <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-center leading-relaxed">
+              <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-center leading-relaxed text-balance">
                 Emergent theses<br />will appear here
               </p>
             </div>
@@ -105,7 +106,7 @@ export function GhostPanel({ ghostNotes, isOpen, onClose, onClaim, onDismiss }: 
                       </p>
                     </div>
                   ) : (
-                    <p className="text-[13px] font-medium leading-relaxed text-foreground/75">
+                    <p className="text-[13px] font-medium leading-relaxed text-foreground/75 text-pretty">
                       {note.text}
                     </p>
                   )}
@@ -114,7 +115,7 @@ export function GhostPanel({ ghostNotes, isOpen, onClose, onClaim, onDismiss }: 
                   {!note.isGenerating && (
                     <button
                       onClick={() => onClaim(note.id)}
-                      className="flex items-center gap-1.5 w-full justify-center rounded-sm bg-primary/15 hover:bg-primary/25 px-2.5 py-1.5 font-mono text-[9px] font-black uppercase tracking-wider text-primary transition-colors"
+                      className="flex items-center gap-1.5 w-full justify-center rounded-sm bg-primary/15 hover:bg-primary/25 px-2.5 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-primary transition-colors active:scale-[0.98]"
                     >
                       <Check className="h-3 w-3 stroke-[3px]" />
                       Add to canvas
