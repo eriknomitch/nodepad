@@ -16,4 +16,6 @@ tsconfig.tsbuildinfo
 next-env.d.ts
 
 # Internal docs
-CLAUDE.md
+# CLAUDE.md
+
+.env
