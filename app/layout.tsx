@@ -1,11 +1,19 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Vazirmatn } from 'next/font/google'
+import { Inter, JetBrains_Mono, Vazirmatn } from 'next/font/google'
 import Script from 'next/script'
 import { MobileWall } from '@/components/mobile-wall'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
   variable: "--font-vazirmatn",
@@ -41,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased ${vazirmatn.variable}`} suppressHydrationWarning>
+      <body className={`font-sans antialiased ${inter.variable} ${jetbrainsMono.variable} ${vazirmatn.variable}`} suppressHydrationWarning>
         <MobileWall />
         {children}
         {/* Umami analytics — nodepad.space only. Remove or replace with your

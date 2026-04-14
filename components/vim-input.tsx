@@ -207,7 +207,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
             >
               {/* Search input */}
               <div className="flex items-center gap-3 px-5 py-3 border-b border-white/10">
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/60 select-none shrink-0">{mod}K</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60 select-none shrink-0">{mod}K</span>
                 <input
                   ref={searchInputRef}
                   value={search}
@@ -230,7 +230,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                 {/* ── Views ──────────────────────────────────────────────── */}
                 {viewItems.length > 0 && (
                   <div>
-                    <p className="px-1 pb-2 font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-white/45">Views</p>
+                    <p className="px-1 pb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">Views</p>
                     <div className="grid grid-cols-3 gap-1.5">
                       {viewItems.map((item, i) => {
                         const focused = focusedIdx === i
@@ -245,7 +245,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                             <item.icon className={`h-[18px] w-[18px] transition-transform duration-100 ${focused ? "scale-110" : "group-hover:scale-105"}`} />
                             <div className="text-center leading-tight">
                               <div className="font-mono text-[10px] font-semibold tracking-tight">{item.label}</div>
-                              {item.sub && <div className={`font-mono text-[7px] uppercase tracking-[0.15em] mt-0.5 ${focused ? "text-primary/60" : "text-white/40"}`}>{item.sub}</div>}
+                              {item.sub && <div className={`font-mono text-[10px] uppercase tracking-[0.15em] mt-0.5 ${focused ? "text-primary/60" : "text-white/40"}`}>{item.sub}</div>}
                             </div>
                           </button>
                         )
@@ -257,7 +257,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                 {/* ── Navigate ───────────────────────────────────────────── */}
                 {navItems.length > 0 && (
                   <div className="border-t border-white/10 pt-3">
-                    <p className="px-1 pb-2 font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-white/45">Navigate</p>
+                    <p className="px-1 pb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">Navigate</p>
                     <div className="grid grid-cols-4 gap-1.5">
                       {navItems.map((item, i) => {
                         const idx     = viewCount + i
@@ -273,7 +273,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                             <item.icon className={`h-[18px] w-[18px] transition-transform duration-100 ${focused ? "scale-110" : "group-hover:scale-105"}`} />
                             <div className="text-center leading-tight">
                               <div className="font-mono text-[10px] font-semibold tracking-tight">{item.label}</div>
-                              {item.sub && <div className={`font-mono text-[7px] uppercase tracking-[0.15em] mt-0.5 ${focused ? "text-primary/60" : "text-white/40"}`}>{item.sub}</div>}
+                              {item.sub && <div className={`font-mono text-[10px] uppercase tracking-[0.15em] mt-0.5 ${focused ? "text-primary/60" : "text-white/40"}`}>{item.sub}</div>}
                             </div>
                           </button>
                         )
@@ -285,7 +285,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                 {/* ── Actions ────────────────────────────────────────────── */}
                 {actionItems.length > 0 && (
                   <div className="border-t border-white/10 pt-3">
-                    <p className="px-1 pb-2 font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-white/45">Actions</p>
+                    <p className="px-1 pb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">Actions</p>
                     <div className="grid grid-cols-5 gap-1.5">
                       {actionItems.map((item, i) => {
                         const idx     = viewCount + navCount + i
@@ -301,7 +301,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                             <item.icon className={`h-[18px] w-[18px] transition-transform duration-100 ${focused ? "scale-110" : "group-hover:scale-105"}`} />
                             <div className="text-center leading-tight">
                               <div className="font-mono text-[10px] font-semibold tracking-tight">{item.label}</div>
-                              <div className={`font-mono text-[7px] uppercase tracking-[0.15em] mt-0.5 ${focused ? "text-primary/60" : "text-white/40"}`}>{item.sub}</div>
+                              <div className={`font-mono text-[10px] uppercase tracking-[0.15em] mt-0.5 ${focused ? "text-primary/60" : "text-white/40"}`}>{item.sub}</div>
                             </div>
                           </button>
                         )
@@ -312,7 +312,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
 
                 {/* ── Empty state ────────────────────────────────────────── */}
                 {totalItems === 0 && (
-                  <div className="py-10 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-white/45">
+                  <div className="py-10 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
                     No commands match
                   </div>
                 )}
@@ -327,8 +327,8 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                   ["esc","close"],
                 ].map(([key, label]) => (
                   <div key={key} className="flex items-center gap-1.5">
-                    <kbd className="font-mono text-[9px] text-white/50 bg-white/8 border border-white/15 rounded px-1 py-0.5">{key}</kbd>
-                    <span className="font-mono text-[8px] uppercase tracking-wider text-white/60">{label}</span>
+                    <kbd className="font-mono text-[10px] text-white/50 bg-white/8 border border-white/15 rounded px-1 py-0.5">{key}</kbd>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-white/60">{label}</span>
                   </div>
                 ))}
               </div>
@@ -367,7 +367,7 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
                 }
               }}
               placeholder="Capture something..."
-              className="flex-1 bg-transparent font-mono text-sm tracking-tight text-white outline-none placeholder:text-white/55 resize-none overflow-hidden"
+              className="flex-1 bg-transparent font-mono text-sm tracking-tight text-foreground outline-none placeholder:text-white/55 resize-none overflow-hidden"
               rows={1}
               autoFocus
             />
@@ -375,21 +375,21 @@ export function VimInput({ onSubmit, onCommand, isCommandKOpen, setIsCommandKOpe
 
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <kbd className="flex h-5 items-center rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[9px] text-white/60">
+              <kbd className="flex h-5 items-center rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] text-white/60">
                 <span className="text-[11px] mr-1">⌘</span>
                 <span>Z</span>
               </kbd>
-              <span className="text-[9px] font-mono font-semibold text-white/55 uppercase tracking-tighter">Undo</span>
+              <span className="text-[10px] font-mono font-semibold text-white/55 uppercase tracking-tighter">Undo</span>
             </div>
 
             <div className="h-4 w-px bg-white/10" />
 
             <div className="flex items-center gap-2">
-              <kbd className="flex h-5 items-center rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[9px] text-white/60">
+              <kbd className="flex h-5 items-center rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] text-white/60">
                 <span className="text-[11px] mr-1">⌘</span>
                 <span>K</span>
               </kbd>
-              <span className="text-[9px] font-mono font-semibold text-white/55 uppercase tracking-tighter">Commands</span>
+              <span className="text-[10px] font-mono font-semibold text-white/55 uppercase tracking-tighter">Commands</span>
             </div>
 
             <div className="h-4 w-px bg-white/20" />

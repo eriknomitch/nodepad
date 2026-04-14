@@ -6,9 +6,9 @@ export function MobileWall() {
       {/* Logo */}
       <div className="mb-8 flex items-center gap-2.5">
         <div className="flex items-center gap-1">
-          <span className="h-3.5 w-3.5 rounded-sm bg-[#3ecf6e]" />
-          <span className="h-3.5 w-3.5 rounded-sm bg-[#3ecf6e] opacity-60" />
-          <span className="h-3.5 w-3.5 rounded-sm bg-[#3ecf6e] opacity-30" />
+          <span className="size-3.5 rounded-sm bg-primary" />
+          <span className="size-3.5 rounded-sm bg-primary opacity-60" />
+          <span className="size-3.5 rounded-sm bg-primary opacity-30" />
         </div>
         <span className="font-mono text-sm font-semibold tracking-tight text-foreground">
           nodepad

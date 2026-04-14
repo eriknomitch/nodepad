@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "exportedAt": 1776174807560,
+  "project": {
+    "id": "3vp2uyyk",
+    "name": "Engineering Week 2026-04-07",
+    "blocks": [
+      {
+        "id": "t6hqot7s",
+        "text": "Elaine Rogalla onboarded with help from Bohdan Sameliuk setting up local Qumis workspace (Apr 13)",
+        "timestamp": 1776174712731.5588,
+        "contentType": "narrative",
+        "category": "general",
+        "annotation": "This note highlights the collaborative onboarding process of Elaine Rogalla, facilitated by Bohdan Sameliuk, focusing on setting up a local Qumis workspace. This suggests a structured approach to onboarding, emphasizing the importance of mentorship and technical setup in integrating new team members effectively."
+      },
+      {
+        "id": "w19yrg5g",
+        "text": "Research into AI-native QA platforms: TestSprite (MCP/agent-driven autonomous API testing), Mabl (agentic test generation from natural language), ACCELQ/testRigor/Virtuoso (low/no-code AI test platforms). Initial take shared as qumis-platform PR #20.",
+        "timestamp": 1776174712814.56,
+        "contentType": "entity",
+        "category": "technology",
+        "annotation": "**TestSprite**, **Mabl**, **ACCELQ**, **testRigor**, and **Virtuoso** represent a new wave of AI-native QA platforms that leverage AI to automate and enhance software testing processes. These tools vary in their approach, from autonomous API testing to low/no-code test generation, making them suitable for different testing needs and environments. Understanding the specific capabilities and integrations of each platform is crucial for selecting the right tool for a tech stack that includes React/Next, REST/GraphQL, and AI agents."
+      },
+      {
+        "id": "r221c157",
+        "text": "Which AI-native QA tool best fits our stack (React/Next + REST/GraphQL + heavy AI agents) and how would it plug into CI?",
+        "timestamp": 1776174712892.761,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "To determine the best AI-native QA tool for your stack, consider evaluating platforms like **TestSprite** and **Mabl** for their compatibility with React/Next.js and REST/GraphQL APIs. Assess how these tools integrate with CI/CD pipelines, focusing on their ability to automate testing processes and support AI-driven testing agents. Additionally, explore how these tools handle version control and continuous integration to ensure seamless deployment and testing cycles."
+      },
+      {
+        "id": "0k6rqfa0",
+        "text": "New qp db commands (migrate, rollback, status, generate, setup) shipped. qp start now auto-checks pending migrations. Docker Compose V2 upgrade with V1 fallback. qp restart no longer force-restarts containers.",
+        "timestamp": 1776174712968.7942,
+        "contentType": "entity",
+        "category": "technology",
+        "annotation": "**Docker Compose V2** is a significant upgrade that introduces new features and improvements over V1, such as better performance and enhanced networking capabilities. However, the fallback to V1 ensures compatibility and stability for existing setups that may not yet be fully compatible with V2. This dual support can ease the transition for teams and reduce potential disruptions."
+      },
+      {
+        "id": "wu9xafee",
+        "text": "Run git pull in qumis-platform and try qp db status to verify new migration tooling works locally.",
+        "timestamp": 1776174713044.333,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "Ensure that your local environment is up-to-date with the latest changes in the Qumis platform by running `git pull`. After updating, use `qp db status` to verify that the new migration tooling is functioning correctly. This step is crucial to confirm that the recent updates to the database commands, such as migrate, rollback, and status, are operational in your local setup."
+      },
+      {
+        "id": "q5zqbipt",
+        "text": "Chat backend gating docs and diagnostic prompts for sandbox/co-pilot debugging added (ENG-2227).",
+        "timestamp": 1776174713118.52,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "Consider developing a comprehensive diagnostic framework for the chat backend gating system. This could include automated tests and logging mechanisms to quickly identify and resolve issues in sandbox or co-pilot environments. Additionally, ensure that the documentation is easily accessible and regularly updated to reflect any changes in the debugging process."
+      },
+      {
+        "id": "p4bufark",
+        "text": "HTML renderer feature (api #355, copilot-api #44, web #509) is architecturally sound but has 5 must-fix issues: console.log in production, blob URL memory leak, undefined content crash risk, contradictory prompt instructions, and deployment ordering risk across 3 repos.",
+        "timestamp": 1776174713193.1401,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "Addressing the five critical issues in the HTML renderer feature is essential for ensuring stability and performance. Consider implementing a **feature flag** to manage the deployment across the three repositories, which can help mitigate the deployment ordering risk. Additionally, establishing a robust **testing framework** for these issues could prevent similar problems in future releases."
+      },
+      {
+        "id": "orxz1625",
+        "text": "The HTML renderer PRs across api, copilot-api, and web need coordinated release or a feature flag — merging copilot-api before web will render raw HTML as markdown text in production.",
+        "timestamp": 1776174713264.8708,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "Consider implementing a **feature flag** to manage the release of HTML renderer PRs across different repositories. This approach allows for controlled deployment and testing, reducing the risk of raw HTML being rendered as markdown text in production. Additionally, ensure that all teams involved are aligned on the release schedule to prevent inconsistencies."
+      },
+      {
+        "id": "zgkj4q1g",
+        "text": "Fix HTML renderer blockers before merge: (1) remove console.log in HtmlModalPortal.tsx, (2) fix blob URL memory leak with useEffect cleanup, (3) add optional chaining for message.content?.startsWith(), (4) resolve contradictory prompt instructions in copilot-api.",
+        "timestamp": 1776174713338.577,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "Consider implementing a **feature flag** for the HTML renderer to manage the deployment of these fixes incrementally. This approach allows for testing in a controlled environment before a full rollout, minimizing potential disruptions. Additionally, ensure that the cleanup of the blob URL memory leak is thoroughly tested to prevent any performance issues in production."
+      },
+      {
+        "id": "nsxqy0xu",
+        "text": "allow-popups in iframe sandbox lets AI-generated HTML open arbitrary tabs — should be removed unless there's a concrete use case.",
+        "timestamp": 1776174713409.606,
+        "contentType": "claim",
+        "category": "technology",
+        "annotation": "The inclusion of **allow-popups** in an iframe's sandbox attribute can pose significant security risks, as it permits the opening of arbitrary tabs or windows, potentially leading to malicious activities. This capability should be disabled unless there is a specific, justified use case that necessitates its presence, such as a feature that requires user interaction with multiple windows. Ensuring a secure environment often involves balancing functionality with potential vulnerabilities, and in this case, the default should lean towards security unless explicitly required otherwise."
+      },
+      {
+        "id": "cqkfxspr",
+        "text": "Should AI-generated HTML responses be billed? chargeable_types doesn't include 'html' — needs a product decision.",
+        "timestamp": 1776174713483.036,
+        "contentType": "question",
+        "category": "technology",
+        "annotation": "The decision to bill AI-generated HTML responses hinges on whether they are considered a distinct service or an extension of existing functionalities. If HTML responses provide significant added value or require additional resources, they might warrant separate billing. Consider whether this aligns with the current pricing strategy and how it might affect customer perception and usage patterns."
+      },
+      {
+        "id": "lszmqk1f",
+        "text": "PRs up for review: web #561 (sandbox notification on fallback), sandbox #13 (CI/CD for Fly Image Registry), web #562 (qumis.com -> prod.qumis.ai UTM/PostHog session propagation).",
+        "timestamp": 1776174713556.485,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "Ensure that the sandbox notification and CI/CD processes are thoroughly tested to prevent any disruptions in the deployment pipeline. Additionally, verify that the UTM/PostHog session propagation is correctly implemented to maintain accurate tracking and analytics. Consider potential dependencies or conflicts with other ongoing projects, such as the HTML renderer feature, which may require coordinated releases or feature flags."
+      },
+      {
+        "id": "1p3kesmd",
+        "text": "Erik flagged potential sandbox breakage from abandoned claudish fork process after an engineering-updates post — investigated and determined it should be fine.",
+        "timestamp": 1776174713633.413,
+        "contentType": "reflection",
+        "category": "technology",
+        "annotation": "The concern about the sandbox breakage due to an abandoned claudish fork process highlights the importance of maintaining clean and updated code branches. Abandoned processes can lead to unexpected issues if not properly managed, especially in environments where multiple branches and forks are common. This situation underscores the need for robust monitoring and cleanup strategies to prevent potential disruptions in development workflows."
+      },
+      {
+        "id": "sek5gjm0",
+        "text": "[HTML_CONTENT] magic string is hardcoded across 3 repos (copilot-api prompt, util-chat.tsx, HtmlMessageRenderer.tsx). If the prefix ever changes, all three need updating. Should be extracted to a shared constant.",
+        "timestamp": 1776174713708.3398,
+        "contentType": "task",
+        "category": "technology",
+        "annotation": "Extracting the hardcoded \"magic string\" into a shared constant is a classic example of the **DRY principle** (Don't Repeat Yourself), which aims to reduce repetition of software patterns. This change would not only simplify future updates but also minimize the risk of inconsistencies across the repositories. Consider implementing a centralized configuration file or module that can be imported wherever needed, ensuring that any future changes to the string only need to be made in one place."
+      }
+    ],
+    "collapsedIds": [],
+    "ghostNotes": [],
+    "lastGhostTexts": null,
+    "lastGhostBlockCount": null,
+    "lastGhostTimestamp": null
+  }
+}

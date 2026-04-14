@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function NotFound() {
   return (
-    <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-background">
+    <div className="relative flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden bg-background">
 
       {/* Scattered ghost tiles — visual echo of the canvas */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -53,9 +53,9 @@ export default function NotFound() {
         {/* Logo mark */}
         <div className="mb-2 flex items-center gap-2">
           <div className="flex items-center gap-1">
-            <span className="h-2.5 w-2.5 rounded-[3px] bg-[var(--type-quote)]" />
-            <span className="h-2.5 w-2.5 rounded-[3px] bg-[var(--type-quote)] opacity-60" />
-            <span className="h-2.5 w-2.5 rounded-[3px] bg-[var(--type-quote)] opacity-30" />
+            <span className="size-2.5 rounded-[3px] bg-[var(--type-quote)]" />
+            <span className="size-2.5 rounded-[3px] bg-[var(--type-quote)] opacity-60" />
+            <span className="size-2.5 rounded-[3px] bg-[var(--type-quote)] opacity-30" />
           </div>
           <span className="font-mono text-xs font-semibold tracking-tight text-foreground/60">
             nodepad
@@ -64,7 +64,7 @@ export default function NotFound() {
 
         {/* 404 */}
         <div
-          className="font-mono text-[clamp(6rem,18vw,14rem)] font-black leading-none tracking-tighter"
+          className="font-mono text-[clamp(6rem,18vw,14rem)] font-semibold leading-none tracking-tighter"
           style={{ color: "var(--type-question)", opacity: 0.18 }}
           aria-hidden
         >

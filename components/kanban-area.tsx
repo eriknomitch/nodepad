@@ -108,7 +108,7 @@ export function KanbanArea({
   }, [columns])
 
   return (
-    <div className="relative h-full w-full bg-[#08090a] overflow-hidden">
+    <div className="relative h-full w-full bg-canvas overflow-hidden">
       {/* Scrollable Container */}
       <div 
         ref={containerRef}
@@ -128,12 +128,12 @@ export function KanbanArea({
               {/* Column Header */}
               <div className="flex items-center justify-between px-3 py-2.5 border-b border-border/40">
                 <div className="flex items-center gap-2">
-                  <col.icon className="h-4 w-4 text-muted-foreground" />
+                  <col.icon className="size-4 text-muted-foreground" />
                   <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground/70">
                     {col.title}
                   </h3>
                 </div>
-                <span className="font-mono text-[9px] text-muted-foreground/40 font-semibold tabular-nums">
+                <span className="font-mono text-[10px] text-muted-foreground/40 font-semibold tabular-nums">
                   {col.blocks.length}
                 </span>
               </div>

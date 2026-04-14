@@ -24,18 +24,18 @@ export function KanbanMinimap({ columns, onColumnClick }: KanbanMinimapProps) {
         <button
           key={col.id}
           onClick={() => onColumnClick(col.id)}
-          className="group relative flex items-center justify-center h-8 w-8 rounded transition-colors hover:bg-white/10 active:scale-95"
+          className="group relative flex items-center justify-center size-8 rounded transition-colors hover:bg-white/10 active:scale-95"
           title={col.title}
         >
-          <col.icon className="h-4 w-4 text-foreground/60 group-hover:text-foreground transition-colors" />
+          <col.icon className="size-4 text-foreground/60 group-hover:text-foreground transition-colors" />
           
           {/* Indicator dot */}
-          <div className="absolute -top-0.5 -right-0.5 h-3 w-3 flex items-center justify-center rounded-full bg-primary text-[7px] font-semibold text-primary-foreground border-2 border-background scale-0 group-hover:scale-100 transition-transform tabular-nums">
+          <div className="absolute -top-0.5 -right-0.5 size-3 flex items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground border-2 border-background scale-0 group-hover:scale-100 transition-transform tabular-nums">
             {col.count}
           </div>
 
           {/* Label Tooltip (Minimal) */}
-          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-popover text-[9px] font-mono text-popover-foreground opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-border">
+          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 rounded bg-popover text-[10px] font-mono text-popover-foreground opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-border">
             {col.title.toUpperCase()}
           </div>
         </button>

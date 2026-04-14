@@ -16,7 +16,7 @@ export default function OGImage() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "flex-end",
-          background: "#0a0a0a",
+          background: "#08090a",
           padding: "80px 96px",
           fontFamily: "sans-serif",
         }}
@@ -24,11 +24,11 @@ export default function OGImage() {
         {/* Logo mark */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "48px" }}>
           <div style={{ display: "flex", gap: "6px" }}>
-            <div style={{ width: 28, height: 28, borderRadius: 5, background: "#3ecf6e" }} />
-            <div style={{ width: 28, height: 28, borderRadius: 5, background: "#3ecf6e", opacity: 0.6 }} />
-            <div style={{ width: 28, height: 28, borderRadius: 5, background: "#3ecf6e", opacity: 0.3 }} />
+            <div style={{ width: 28, height: 28, borderRadius: 5, background: "#5e6ad2" }} />
+            <div style={{ width: 28, height: 28, borderRadius: 5, background: "#5e6ad2", opacity: 0.6 }} />
+            <div style={{ width: 28, height: 28, borderRadius: 5, background: "#5e6ad2", opacity: 0.3 }} />
           </div>
-          <span style={{ fontSize: 28, fontWeight: 600, color: "#f0f0f0", letterSpacing: "-0.5px" }}>
+          <span style={{ fontSize: 28, fontWeight: 590, color: "#f7f8f8", letterSpacing: "-0.5px" }}>
             nodepad
           </span>
         </div>
@@ -37,8 +37,8 @@ export default function OGImage() {
         <div
           style={{
             fontSize: 72,
-            fontWeight: 700,
-            color: "#f0f0f0",
+            fontWeight: 590,
+            color: "#f7f8f8",
             lineHeight: 1.05,
             letterSpacing: "-2px",
             marginBottom: 32,
@@ -46,7 +46,7 @@ export default function OGImage() {
         >
           Think spatially.
           <br />
-          <span style={{ color: "#3ecf6e" }}>Let AI fill the gaps.</span>
+          <span style={{ color: "#7170ff" }}>Let AI fill the gaps.</span>
         </div>
 
         {/* Subline */}

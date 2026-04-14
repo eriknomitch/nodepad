@@ -1,0 +1,2 @@
+[console_scripts]
+cli-anything-nodepad = cli_anything.nodepad.nodepad_cli:cli

@@ -68,7 +68,7 @@ const MarkdownComponents = {
         rel="noopener noreferrer"
         className="inline-flex items-center gap-0.5 text-primary hover:underline"
       >
-        <LinkIcon className="h-2.5 w-2.5" />
+        <LinkIcon className="size-2.5" />
         {children || displayDomain}
       </a>
     )
@@ -330,21 +330,21 @@ export const TileCard = memo(function TileCard({
               aria-label={effectiveCollapsed ? "Expand panel" : "Collapse panel"}
             >
               {effectiveCollapsed ? (
-                isTextRTL ? <ChevronLeft className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />
+                isTextRTL ? <ChevronLeft className="size-3" /> : <ChevronRight className="size-3" />
               ) : (
-                <ChevronDown className={`h-3 w-3 transition-transform ${block.isPinned ? "scale-110" : ""}`} />
+                <ChevronDown className={`size-3 transition-transform ${block.isPinned ? "scale-110" : ""}`} />
               )}
             </button>
           )}
 
           {/* Type display — read-only label */}
-          <Icon className="h-3 w-3 flex-shrink-0" />
+          <Icon className="size-3 flex-shrink-0" />
           <span className="font-mono text-[10px] font-semibold uppercase tracking-wider truncate max-w-[200px]">
             {config.label}
           </span>
 
           {block.isUnrelated && !effectiveCollapsed && (
-            <span className="ml-1 rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-tighter text-black/60">
+            <span className="ml-1 rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-tighter text-black/60">
               Not related to topic
             </span>
           )}
@@ -382,11 +382,11 @@ export const TileCard = memo(function TileCard({
                 e.stopPropagation()
                 onReEnrich(block.id, "thesis")
               }}
-              className="flex h-5 w-5 items-center justify-center rounded-sm transition-opacity hover:bg-black/20 active:scale-95"
+              className="flex size-5 items-center justify-center rounded-sm transition-opacity hover:bg-black/20 active:scale-95"
               title="Refresh thesis synthesis"
               disabled={block.isEnriching}
             >
-              <RefreshCw className={`h-2.5 w-2.5 ${block.isEnriching ? "animate-spin opacity-50" : ""}`} />
+              <RefreshCw className={`size-2.5 ${block.isEnriching ? "animate-spin opacity-50" : ""}`} />
             </button>
           )}
           {!effectiveCollapsed && onTogglePin && (
@@ -395,11 +395,11 @@ export const TileCard = memo(function TileCard({
                 e.stopPropagation()
                 onTogglePin(block.id)
               }}
-              className={`flex h-5 w-5 items-center justify-center rounded-sm transition-opacity shadow-subtle active:scale-95 ${block.isPinned ? "bg-black/20 opacity-100 scale-110 !opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
+              className={`flex size-5 items-center justify-center rounded-sm transition-opacity shadow-subtle active:scale-95 ${block.isPinned ? "bg-black/20 opacity-100 scale-110 !opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
               aria-label={block.isPinned ? "Unpin note" : "Pin note"}
               title={block.isPinned ? "Unpin note" : "Pin note"}
             >
-              <Pin className={`h-2.5 w-2.5 transition-transform ${block.isPinned ? "fill-current" : "-rotate-45"}`} />
+              <Pin className={`size-2.5 transition-transform ${block.isPinned ? "fill-current" : "-rotate-45"}`} />
             </button>
           )}
           {/* Change-type button — portal dropdown, clear of tile overflow:hidden */}
@@ -413,10 +413,10 @@ export const TileCard = memo(function TileCard({
                 }
                 setIsTypePickerOpen(v => !v)
               }}
-              className={`flex h-5 w-5 items-center justify-center rounded-sm transition-opacity active:scale-95 ${isTypePickerOpen ? "bg-black/20 opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
+              className={`flex size-5 items-center justify-center rounded-sm transition-opacity active:scale-95 ${isTypePickerOpen ? "bg-black/20 opacity-100" : "opacity-40 hover:opacity-100 hover:bg-black/10"}`}
               title="Change type"
             >
-              <Tag className="h-2.5 w-2.5" />
+              <Tag className="size-2.5" />
             </button>
           )}
           <button
@@ -424,10 +424,10 @@ export const TileCard = memo(function TileCard({
               e.stopPropagation()
               onDelete(block.id)
             }}
-            className="flex h-5 w-5 items-center justify-center rounded-sm transition-opacity hover:bg-black/10 active:scale-95"
+            className="flex size-5 items-center justify-center rounded-sm transition-opacity hover:bg-black/10 active:scale-95"
             aria-label="Delete note"
           >
-            <X className="h-2.5 w-2.5" />
+            <X className="size-2.5" />
           </button>
         </div>
       </div>
@@ -446,7 +446,7 @@ export const TileCard = memo(function TileCard({
           }}
           onMouseDown={e => e.stopPropagation()}
         >
-          <p className="px-2.5 pt-2 pb-1 font-mono text-[9px] uppercase tracking-widest text-muted-foreground/50">
+          <p className="px-2.5 pt-2 pb-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
             Change type
           </p>
           <div className="grid grid-cols-2 gap-px p-1.5 pt-0">
@@ -464,7 +464,7 @@ export const TileCard = memo(function TileCard({
                     }}
                     className={`flex items-center gap-2 rounded-sm px-2 py-1.5 text-left transition-colors hover:bg-secondary/60 ${isActive ? "bg-secondary/80" : ""}`}
                   >
-                    <TypeIcon className="h-3 w-3 flex-shrink-0" style={{ color: cfg.accentVar }} />
+                    <TypeIcon className="size-3 flex-shrink-0" style={{ color: cfg.accentVar }} />
                     <span
                       className="font-mono text-[10px] uppercase tracking-wide"
                       style={{ color: isActive ? cfg.accentVar : undefined }}
@@ -518,11 +518,11 @@ export const TileCard = memo(function TileCard({
                           e.preventDefault()
                           handleSave()
                         }}
-                        className="ml-auto flex h-5 w-5 items-center justify-center rounded-sm transition-transform active:scale-95"
+                        className="ml-auto flex size-5 items-center justify-center rounded-sm transition-transform active:scale-95"
                         style={{ background: accent, color: "var(--background)" }}
                         aria-label="Save edit"
                       >
-                        <Check className="h-3 w-3" />
+                        <Check className="size-3" />
                       </button>
                     </div>
                   </div>
@@ -530,7 +530,7 @@ export const TileCard = memo(function TileCard({
                   <div className="w-full">
                     {block.isError && (
                       <div className="mb-3 flex items-start gap-2 rounded-sm border border-destructive/20 bg-destructive/10 px-2.5 py-2">
-                        <span className="mt-px font-mono text-[9px] text-destructive/80 uppercase tracking-wider leading-relaxed">
+                        <span className="mt-px font-mono text-[10px] text-destructive/80 uppercase tracking-wider leading-relaxed">
                           {block.statusText === "no-api-key"
                             ? <>AI enrichment failed — no API key. Open the <strong className="text-destructive-foreground">☰ sidebar → Settings</strong> to add your API key.</>
                             : block.statusText
@@ -546,9 +546,9 @@ export const TileCard = memo(function TileCard({
                             <div key={st.id} className="group/task flex items-start gap-3 rounded-md bg-white/5 p-2 transition-colors hover:bg-white/10">
                               <button
                                 onClick={() => onToggleSubTask?.(block.id, st.id)}
-                                className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors`} style={{ backgroundColor: st.isDone ? 'var(--type-task)' : 'transparent', borderColor: st.isDone ? 'var(--type-task)' : 'color-mix(in oklch, var(--type-task) 50%, transparent)' }}
+                                className={`mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border transition-colors`} style={{ backgroundColor: st.isDone ? 'var(--type-task)' : 'transparent', borderColor: st.isDone ? 'var(--type-task)' : 'color-mix(in oklch, var(--type-task) 50%, transparent)' }}
                               >
-                                {st.isDone && <Check className="h-3 w-3 text-white" />}
+                                {st.isDone && <Check className="size-3 text-foreground" />}
                               </button>
                               <span className={`flex-1 text-sm leading-relaxed transition-colors ${st.isDone ? 'text-foreground/40 line-through' : 'text-foreground'}`}>
                                 {st.text}
@@ -557,7 +557,7 @@ export const TileCard = memo(function TileCard({
                                 onClick={() => onDeleteSubTask?.(block.id, st.id)}
                                 className="opacity-0 group-hover/task:opacity-100 p-1 hover:bg-destructive/20 rounded transition-opacity"
                               >
-                                <X className="h-3 w-3 text-destructive" />
+                                <X className="size-3 text-destructive" />
                               </button>
                             </div>
                           ))}
@@ -587,7 +587,7 @@ export const TileCard = memo(function TileCard({
                             <span className="font-mono text-[10px] text-muted-foreground/60">
                               Enter ↵ save · Shift+Enter newline · Esc cancel
                             </span>
-                            <span className="font-mono text-[9px] text-primary font-semibold uppercase tracking-widest opacity-80">Markdown Editor</span>
+                            <span className="font-mono text-[10px] text-primary font-semibold uppercase tracking-widest opacity-80">Markdown Editor</span>
                           </div>
                         </div>
                     ) : (
@@ -611,8 +611,8 @@ export const TileCard = memo(function TileCard({
             {block.confidence !== undefined && block.confidence !== null && !isEditing && (
               <div className={`px-3 pb-2 flex-shrink-0 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-mono text-[9px] text-muted-foreground">Confidence</span>
-                  <span className="font-mono text-[9px] text-muted-foreground tabular-nums">{Math.round(block.confidence)}%</span>
+                  <span className="font-mono text-[10px] text-muted-foreground">Confidence</span>
+                  <span className="font-mono text-[10px] text-muted-foreground tabular-nums">{Math.round(block.confidence)}%</span>
                 </div>
                 <div className="h-0.5 w-full overflow-hidden rounded-full bg-secondary">
                   <div
@@ -661,29 +661,29 @@ export const TileCard = memo(function TileCard({
                           onMouseEnter={() => block.influencedBy?.forEach(id => onHighlight?.(id))}
                           onMouseLeave={() => block.influencedBy?.forEach(() => onHighlight?.(null))}
                         >
-                          <Sparkles className="h-2.5 w-2.5 text-primary" />
-                          <span className="font-mono text-[9px] font-semibold text-primary uppercase tracking-tighter tabular-nums">
+                          <Sparkles className="size-2.5 text-primary" />
+                          <span className="font-mono text-[10px] font-semibold text-primary uppercase tracking-tighter tabular-nums">
                             {block.influencedBy.length} {block.influencedBy.length === 1 ? 'Link' : 'Links'}
                           </span>
                         </div>
 
                         {/* Hover Tooltip */}
                         <div className="absolute bottom-full left-0 mb-2 w-56 p-2 rounded-sm bg-black/90 backdrop-blur-md border border-white/10 shadow-elevated opacity-0 translate-y-2 pointer-events-none group-hover/influences:opacity-100 group-hover/influences:translate-y-0 transition-[opacity,translate] z-[100]">
-                          <h5 className="font-mono text-[8px] font-semibold text-muted-foreground uppercase tracking-widest mb-1.5 border-b border-white/5 pb-1">Connected nodes</h5>
+                          <h5 className="font-mono text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-1.5 border-b border-white/5 pb-1">Connected nodes</h5>
                           <div className="flex flex-col gap-1">
                             {block.influencedBy.slice(0, 5).map((id, i) => {
                               const linked = allBlocks?.find(b => b.id === id)
                               return (
                                 <div key={i} className="flex items-start gap-2 overflow-hidden">
-                                  <div className="h-1 w-1 rounded-full bg-primary shrink-0 mt-1" />
-                                  <span className="font-mono text-[9px] text-foreground/70 truncate leading-tight">
+                                  <div className="size-1 rounded-full bg-primary shrink-0 mt-1" />
+                                  <span className="font-mono text-[10px] text-foreground/70 truncate leading-tight">
                                     {linked ? linked.text.substring(0, 48) + (linked.text.length > 48 ? '…' : '') : `#${id.slice(0, 8)}`}
                                   </span>
                                 </div>
                               )
                             })}
                             {block.influencedBy.length > 5 && (
-                              <span className="font-mono text-[8px] text-muted-foreground/50 mt-1">+{block.influencedBy.length - 5} more</span>
+                              <span className="font-mono text-[10px] text-muted-foreground/50 mt-1">+{block.influencedBy.length - 5} more</span>
                             )}
                           </div>
                         </div>
@@ -698,12 +698,12 @@ export const TileCard = memo(function TileCard({
                       onClick={() => setIsFooterExpanded(!isFooterExpanded)}
                       className={`rounded-sm p-1 transition-colors active:scale-95 ${isFooterExpanded ? 'bg-primary/20 text-primary' : 'text-muted-foreground/40 hover:text-muted-foreground/60'}`}
                     >
-                      {isFooterExpanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3 rotate-[-90deg]" />}
+                      {isFooterExpanded ? <ChevronDown className="size-3" /> : <ChevronRight className="size-3 rotate-[-90deg]" />}
                     </button>
                   )}
                   
                   <div className={`flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-secondary/30 border border-border/20 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-20"}`}>
-                    <span className="font-mono text-[8px] text-muted-foreground/50 uppercase tracking-[0.1em]">Node ID:</span>
+                    <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-[0.1em]">Node ID:</span>
                     <span className="font-mono text-[10px] text-muted-foreground/80 font-semibold">#{block.id.slice(0, 6)}</span>
                   </div>
                 </div>
@@ -738,7 +738,7 @@ function linkifyText(text: string): React.ReactNode {
         onDoubleClick={e => e.stopPropagation()}
         className="inline-flex items-center gap-0.5 text-primary underline-offset-2 hover:underline"
       >
-        <LinkIcon className="h-2.5 w-2.5 shrink-0" />
+        <LinkIcon className="size-2.5 shrink-0" />
         {domain}
       </a>
     )
@@ -783,13 +783,13 @@ function renderBody(
       return (
         <div className={`flex items-start gap-2 ${isRTL(text) ? 'flex-row-reverse' : ''}`}>
           <div
-            className="mt-0.5 flex h-3.5 w-3.5 flex-shrink-0 items-center justify-center rounded-sm border"
+            className="mt-0.5 flex size-3.5 flex-shrink-0 items-center justify-center rounded-sm border"
             style={{
               borderColor: accent,
               background: isDone ? accent : "transparent",
             }}
           >
-            {isDone && <Check className="h-2.5 w-2.5" style={{ color: "var(--background)" }} />}
+            {isDone && <Check className="size-2.5" style={{ color: "var(--background)" }} />}
           </div>
           <p
             className="text-sm font-semibold leading-relaxed text-foreground"

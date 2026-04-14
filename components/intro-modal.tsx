@@ -44,16 +44,16 @@ export function IntroModal({ open, onClose }: IntroModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 8 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="relative w-full max-w-3xl bg-[#08090a] border border-white/10 rounded-sm shadow-dialog overflow-hidden"
+            className="relative w-full max-w-3xl bg-canvas border border-white/10 rounded-sm shadow-dialog overflow-hidden"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 pt-6 pb-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <div className="flex items-center gap-0.5">
-                    <span className="inline-block h-2.5 w-2.5 rounded-sm bg-primary" />
-                    <span className="inline-block h-2.5 w-2.5 rounded-sm bg-primary/60" />
-                    <span className="inline-block h-2.5 w-2.5 rounded-sm bg-primary/30" />
+                    <span className="inline-block size-2.5 rounded-sm bg-primary" />
+                    <span className="inline-block size-2.5 rounded-sm bg-primary/60" />
+                    <span className="inline-block size-2.5 rounded-sm bg-primary/30" />
                   </div>
                   <span className="font-mono text-sm font-semibold text-foreground tracking-tight">nodepad</span>
                 </div>
@@ -66,7 +66,7 @@ export function IntroModal({ open, onClose }: IntroModalProps) {
                 className="relative p-1.5 rounded-sm text-muted-foreground/40 hover:text-foreground hover:bg-white/10 transition-colors active:scale-95"
                 aria-label="Close"
               >
-                <X className="h-4 w-4" />
+                <X className="size-4" />
                 <span className="absolute inset-0 -m-1" aria-hidden="true" />
               </button>
             </div>

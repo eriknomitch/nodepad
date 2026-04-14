@@ -37,7 +37,7 @@ export function TilingMinimap({ pages, activePageIdx, onPageClick }: TilingMinim
                   transition={{ duration: 0.12, ease: "easeOut" }}
                   className="absolute right-full bottom-0 mr-2.5 w-52 p-2.5 rounded-md bg-black/92 backdrop-blur-md border border-white/10 shadow-dialog pointer-events-none z-50"
                 >
-                  <p className="font-mono text-[7px] uppercase tracking-widest text-white/45 pb-1.5 mb-1.5 border-b border-white/8">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-white/45 pb-1.5 mb-1.5 border-b border-white/8">
                     Page {idx + 1} · {page.length} tile{page.length !== 1 ? "s" : ""}
                   </p>
                   <div className="flex flex-col gap-1.5">
@@ -52,7 +52,7 @@ export function TilingMinimap({ pages, activePageIdx, onPageClick }: TilingMinim
                             className="h-[5px] w-[5px] rounded-[1px] shrink-0 mt-[3px]"
                             style={{ background: config.accentVar, opacity: 0.85 }}
                           />
-                          <span className="font-mono text-[9px] text-white/65 leading-snug">
+                          <span className="font-mono text-[10px] text-white/65 leading-snug">
                             {title}
                           </span>
                         </div>
@@ -92,7 +92,7 @@ export function TilingMinimap({ pages, activePageIdx, onPageClick }: TilingMinim
               </div>
 
               {/* Page number */}
-              <span className={`font-mono text-[7px] font-semibold leading-none transition-colors ${
+              <span className={`font-mono text-[10px] font-semibold leading-none transition-colors ${
                 isActive ? "text-primary/80" : "text-white/35 group-hover:text-white/60"
               }`}>
                 {idx + 1}

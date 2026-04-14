@@ -17,10 +17,10 @@ interface TileIndexProps {
 export function TileIndex({ blocks, onHighlight, highlightedId, onClose, isOpen, viewMode }: TileIndexProps) {
   const getIcon = (type: string) => {
     switch (type) {
-      case "task": return <CheckSquare className="h-3 w-3 text-accent" />
-      case "thesis": return <Sparkles className="h-3 w-3 text-foreground/70" />
-      case "question": return <HelpCircle className="h-3 w-3 text-accent" />
-      default: return <FileText className="h-3 w-3 text-muted-foreground/40" />
+      case "task": return <CheckSquare className="size-3 text-accent" />
+      case "thesis": return <Sparkles className="size-3 text-foreground/70" />
+      case "question": return <HelpCircle className="size-3 text-accent" />
+      default: return <FileText className="size-3 text-muted-foreground/40" />
     }
   }
 
@@ -83,7 +83,7 @@ export function TileIndex({ blocks, onHighlight, highlightedId, onClose, isOpen,
               className="relative p-1 px-1.5 hover:bg-white/5 rounded-sm transition-colors text-muted-foreground hover:text-foreground active:scale-95"
               title="Close Index"
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="size-3.5" />
               <span className="absolute inset-0 -m-1" aria-hidden="true" />
             </button>
           )}
@@ -92,8 +92,8 @@ export function TileIndex({ blocks, onHighlight, highlightedId, onClose, isOpen,
             <h3 className="font-mono text-xs font-semibold uppercase tracking-tight text-foreground/80 select-none text-right">
               {viewMode === "kanban" ? "Board Index" : "Canvas Index"}
             </h3>
-            <div className="flex items-center justify-center h-5 w-5 bg-primary/10 rounded-sm transition-colors group-hover:bg-primary/20 scale-x-[-1]">
-              <LayoutList className="h-3.5 w-3.5 text-primary" />
+            <div className="flex items-center justify-center size-5 bg-primary/10 rounded-sm transition-colors group-hover:bg-primary/20 scale-x-[-1]">
+              <LayoutList className="size-3.5 text-primary" />
             </div>
           </div>
         </div>
@@ -101,14 +101,14 @@ export function TileIndex({ blocks, onHighlight, highlightedId, onClose, isOpen,
         <div className="flex-1 overflow-y-auto custom-scrollbar py-2 px-2 space-y-4">
           {viewMode === "kanban" ? (
             <div className="space-y-1">
-               <h4 className="px-2.5 text-[8px] font-mono font-semibold text-muted-foreground/50 uppercase tracking-widest mb-2">Columns</h4>
+               <h4 className="px-2.5 text-[10px] font-mono font-semibold text-muted-foreground/50 uppercase tracking-widest mb-2">Columns</h4>
                {kanbanColumns.map(col => (
                  <button
                     key={col.id}
                     onClick={() => scrollToColumn(col.id)}
                     className="flex items-center gap-2.5 w-full px-2.5 py-2.5 rounded-sm transition-colors hover:bg-white/5 text-left text-foreground/60 hover:text-foreground group"
                  >
-                   <col.icon className="h-3 w-3 text-primary/40 group-hover:text-primary transition-colors" />
+                   <col.icon className="size-3 text-primary/40 group-hover:text-primary transition-colors" />
                    <span className="font-mono text-[11px] font-semibold uppercase tracking-tight">{col.label}</span>
                  </button>
                ))}
@@ -116,7 +116,7 @@ export function TileIndex({ blocks, onHighlight, highlightedId, onClose, isOpen,
           ) : (
             categories.map(([cat, catBlocks]) => (
               <div key={cat} className="space-y-1">
-                <h4 className="px-2.5 text-[8px] font-mono font-semibold text-muted-foreground/50 uppercase tracking-widest mb-1">{cat}</h4>
+                <h4 className="px-2.5 text-[10px] font-mono font-semibold text-muted-foreground/50 uppercase tracking-widest mb-1">{cat}</h4>
                 {catBlocks.map(block => (
                    <button
                     key={block.id}

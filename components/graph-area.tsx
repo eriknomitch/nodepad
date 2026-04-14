@@ -419,7 +419,7 @@ export function GraphArea({
                 ))}
               </div>
 
-              <p className="text-[13px] text-white uppercase tracking-[0.15em] whitespace-nowrap">
+              <p className="text-[13px] text-foreground uppercase tracking-[0.15em] whitespace-nowrap">
                 {`type anything · #type to classify · ${mod}K for commands`}
               </p>
             </div>
@@ -706,19 +706,19 @@ export function GraphArea({
               >
                 <div className="flex items-center gap-2 px-2.5 py-1.5" style={{ background: accent }}>
                   {config?.icon && React.createElement(config.icon, {
-                    className: "h-3 w-3 flex-shrink-0",
+                    className: "size-3 flex-shrink-0",
                     style: { color: "black", opacity: 0.7 },
                   })}
-                  <span className="font-mono text-[9px] font-black uppercase tracking-widest text-black/70">
+                  <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-black/70">
                     {node.isSynthesis ? "Synthesis" : config?.label}
                   </span>
                   {node.block?.category && (
-                    <span className="ml-auto font-mono text-[8px] text-black/50 truncate max-w-[90px]">
+                    <span className="ml-auto font-mono text-[10px] text-black/50 truncate max-w-[90px]">
                       {node.block.category}
                     </span>
                   )}
                   {node.degree > 0 && (
-                    <span className="ml-auto font-mono text-[8px] text-black/40">
+                    <span className="ml-auto font-mono text-[10px] text-black/40">
                       {node.degree} link{node.degree !== 1 ? "s" : ""}
                     </span>
                   )}
@@ -728,7 +728,7 @@ export function GraphArea({
                 </div>
               </div>
               <div
-                className="mx-4 h-2 w-2 rotate-45 border-b border-r border-white/10 bg-card/95"
+                className="mx-4 size-2 rotate-45 border-b border-r border-white/10 bg-card/95"
                 style={{ marginTop: -1 }}
               />
             </div>
@@ -738,21 +738,21 @@ export function GraphArea({
         {/* ── Legend: centrality explanation ───────────────────────────── */}
         {blocks.length > 2 && (
           <div className="absolute bottom-4 right-4 pointer-events-none flex flex-col items-end gap-1">
-            <span className="font-mono text-[7.5px] text-muted-foreground/20 uppercase tracking-widest">centre = most connected</span>
-            <span className="font-mono text-[7.5px] text-muted-foreground/20 uppercase tracking-widest">edge = isolated</span>
+            <span className="font-mono text-[10px] text-muted-foreground/20 uppercase tracking-widest">centre = most connected</span>
+            <span className="font-mono text-[10px] text-muted-foreground/20 uppercase tracking-widest">edge = isolated</span>
           </div>
         )}
 
         {/* ── Hints ─────────────────────────────────────────────────────── */}
         <div className="absolute bottom-4 left-4 pointer-events-none">
-          <span className="font-mono text-[8px] text-muted-foreground/22 uppercase tracking-widest">
+          <span className="font-mono text-[10px] text-muted-foreground/22 uppercase tracking-widest">
             scroll to zoom · drag to pan · drag node to reposition
           </span>
         </div>
 
         {blocks.length > 0 && (
           <div className="absolute top-4 left-4 pointer-events-none">
-            <span className="font-mono text-[8px] text-muted-foreground/22 uppercase tracking-widest">
+            <span className="font-mono text-[10px] text-muted-foreground/22 uppercase tracking-widest">
               {blocks.length} node{blocks.length !== 1 ? "s" : ""}
               {ghostNote ? " · synthesis active" : ""}
             </span>

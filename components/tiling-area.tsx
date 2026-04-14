@@ -230,7 +230,7 @@ export function TilingArea({
   }
 
   return (
-    <div className="relative flex h-full w-full flex-col overflow-hidden bg-[#020202]">
+    <div className="relative flex h-full w-full flex-col overflow-hidden bg-canvas">
       {/* Task Header stays sticky at top */}
       {taskBlock && (
         <div className={`w-full shrink-0 p-1 z-10 transition-[opacity,filter] duration-300 ${activeConnectionId && !relatedIds.has(taskBlock.id) ? 'opacity-15 saturate-0' : 'opacity-100'}`}>
@@ -270,7 +270,7 @@ export function TilingArea({
             {pageTrees.map((tree, idx) => {
               const count = chunkedPages[idx].length
               // Elastic height: if only 1 tile, don't take a whole screen
-              const heightClass = count <= 2 ? 'h-[300px]' : count <= 4 ? 'h-[60vh]' : 'h-screen'
+              const heightClass = count <= 2 ? 'h-[300px]' : count <= 4 ? 'h-[60vh]' : 'h-dvh'
               return (
                 <div
                   key={idx}
@@ -309,7 +309,7 @@ export function TilingArea({
             </div>
 
 
-            <p className="text-[13px] text-white uppercase tracking-[0.15em] whitespace-nowrap">
+            <p className="text-[13px] text-foreground uppercase tracking-[0.15em] whitespace-nowrap">
               {`type anything · #type to classify · ${mod}K for commands`}
             </p>
           </div>

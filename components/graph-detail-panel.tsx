@@ -16,7 +16,7 @@ const AnnotationMarkdownComponents = {
       rel="noopener noreferrer"
       className="inline-flex items-center gap-0.5 text-primary underline-offset-2 hover:underline"
     >
-      <LinkIcon className="h-2.5 w-2.5 shrink-0" />
+      <LinkIcon className="size-2.5 shrink-0" />
       {children}
     </a>
   ),
@@ -42,7 +42,7 @@ function linkifyText(text: string): React.ReactNode {
         rel="noopener noreferrer"
         className="inline-flex items-center gap-0.5 text-primary underline-offset-2 hover:underline"
       >
-        <LinkIcon className="h-2.5 w-2.5 shrink-0" />
+        <LinkIcon className="size-2.5 shrink-0" />
         {domain}
       </a>
     )
@@ -131,9 +131,9 @@ export function GraphDetailPanel({
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center border-l border-border/60 bg-card/60">
         <div className="flex items-center gap-0.5 opacity-20">
-          <span className="inline-block h-2 w-2 rounded-sm bg-foreground" />
-          <span className="inline-block h-2 w-2 rounded-sm bg-foreground opacity-60" />
-          <span className="inline-block h-2 w-2 rounded-sm bg-foreground opacity-30" />
+          <span className="inline-block size-2 rounded-sm bg-foreground" />
+          <span className="inline-block size-2 rounded-sm bg-foreground opacity-60" />
+          <span className="inline-block size-2 rounded-sm bg-foreground opacity-30" />
         </div>
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/40">
           Select a node to inspect
@@ -187,17 +187,17 @@ export function GraphDetailPanel({
       >
         <div className="flex items-center gap-2 overflow-hidden" style={{ color: "inherit" }}>
           {/* Type display — read-only label; shimmer while enriching */}
-          <Icon className="h-3 w-3 flex-shrink-0" />
+          <Icon className="size-3 flex-shrink-0" />
           <span className={`font-mono text-[10px] font-semibold uppercase tracking-wider ${block.isEnriching ? "shimmer-text" : ""}`}>
             {config.label}
           </span>
           {/* Category tag — read-only, updated by AI on enrichment */}
-          <span className="rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-tighter opacity-60">
+          <span className="rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-tighter opacity-60">
             #{block.category || "no-topic"}
           </span>
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0" style={{ color: "inherit" }}>
-          <span className="font-mono text-[9px] opacity-60">{date}</span>
+          <span className="font-mono text-[10px] opacity-60">{date}</span>
           {/* Change-type button — portal dropdown, clear of panel overflow:hidden */}
           <button
             ref={typeChangeButtonRef}
@@ -210,28 +210,28 @@ export function GraphDetailPanel({
             className={`p-1.5 rounded-sm transition-opacity active:scale-95 ${isTypePickerOpen ? "opacity-100 bg-black/20" : "opacity-40 hover:opacity-90"}`}
             title="Change type"
           >
-            <Tag className="h-3 w-3" />
+            <Tag className="size-3" />
           </button>
           <button
             onClick={() => onTogglePin(block.id)}
             className={`p-1.5 rounded-sm transition-opacity active:scale-95 ${block.isPinned ? "opacity-100" : "opacity-40 hover:opacity-90"}`}
             title={block.isPinned ? "Unpin" : "Pin"}
           >
-            <Pin className="h-3 w-3" />
+            <Pin className="size-3" />
           </button>
           <button
             onClick={() => onReEnrich(block.id)}
             className="p-1.5 rounded-sm opacity-40 hover:opacity-90 transition-opacity active:scale-95"
             title="Re-enrich"
           >
-            <RefreshCw className="h-3 w-3" />
+            <RefreshCw className="size-3" />
           </button>
           <button
             onClick={onClose}
             className="p-1.5 rounded-sm opacity-40 hover:opacity-90 transition-opacity active:scale-95"
             title="Close"
           >
-            <X className="h-3.5 w-3.5" />
+            <X className="size-3.5" />
           </button>
         </div>
       </div>
@@ -269,7 +269,7 @@ export function GraphDetailPanel({
         {block.confidence != null && (
           <div className="px-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[8px] uppercase tracking-widest text-muted-foreground/50">Confidence</span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">Confidence</span>
               <span className="font-mono text-[10px] font-semibold tabular-nums" style={{ color: accent }}>{block.confidence}%</span>
             </div>
             <div className="h-1 w-full rounded-full bg-secondary overflow-hidden">
@@ -329,7 +329,7 @@ export function GraphDetailPanel({
                     onClick={() => onSelectNode(b.id)}
                     className="flex w-full items-start gap-2.5 rounded-sm bg-secondary/30 px-2.5 py-2 text-left hover:bg-secondary/60 transition-colors group"
                   >
-                    <BIcon className="mt-0.5 h-3 w-3 flex-shrink-0" style={{ color: bConfig.accentVar }} />
+                    <BIcon className="mt-0.5 size-3 flex-shrink-0" style={{ color: bConfig.accentVar }} />
                     <span className="text-xs text-muted-foreground group-hover:text-foreground line-clamp-2 leading-relaxed transition-colors">
                       {b.text}
                     </span>
@@ -355,7 +355,7 @@ export function GraphDetailPanel({
           }}
           onMouseDown={e => e.stopPropagation()}
         >
-          <p className="px-2.5 pt-2 pb-1 font-mono text-[9px] uppercase tracking-widest text-muted-foreground/50">
+          <p className="px-2.5 pt-2 pb-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
             Change type
           </p>
           <div className="grid grid-cols-2 gap-px p-1.5 pt-0">
@@ -370,7 +370,7 @@ export function GraphDetailPanel({
                     onClick={() => { onChangeType(block.id, type); setIsTypePickerOpen(false) }}
                     className={`flex items-center gap-2 rounded-sm px-2 py-1.5 text-left transition-colors hover:bg-secondary/60 ${isActive ? "bg-secondary/80" : ""}`}
                   >
-                    <TypeIcon className="h-3 w-3 flex-shrink-0" style={{ color: cfg.accentVar }} />
+                    <TypeIcon className="size-3 flex-shrink-0" style={{ color: cfg.accentVar }} />
                     <span className="font-mono text-[10px] uppercase tracking-wide" style={{ color: isActive ? cfg.accentVar : undefined }}>
                       {cfg.label}
                     </span>
